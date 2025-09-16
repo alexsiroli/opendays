@@ -4,6 +4,8 @@
   const segmented = document.querySelector('.segmented');
   const turno1Title = document.getElementById('turno1-title');
   const turno2Title = document.getElementById('turno2-title');
+  const turno1Meta = document.getElementById('turno1-meta');
+  const turno2Meta = document.getElementById('turno2-meta');
 
   /**
    * Struttura dati attesa in data.json:
@@ -13,10 +15,11 @@
    *   "Misto": { "turno1": [], "turno2": [] }
    * }
    */
+  const EMPTY_TURNO = { allenatore: '', palestra: '', orario: '', nominativi: [] };
   const EMPTY_DATA = {
-    Maschile: { turno1: [], turno2: [] },
-    Femminile: { turno1: [], turno2: [] },
-    Misto: { turno1: [], turno2: [] },
+    Maschile: { turno1: { ...EMPTY_TURNO }, turno2: { ...EMPTY_TURNO } },
+    Femminile: { turno1: { ...EMPTY_TURNO }, turno2: { ...EMPTY_TURNO } },
+    Misto: { turno1: { ...EMPTY_TURNO }, turno2: { ...EMPTY_TURNO } },
   };
 
   let db = EMPTY_DATA;
@@ -37,12 +40,14 @@
   };
 
   function renderCategoria(categoria) {
-    const dataset = db[categoria] || { turno1: [], turno2: [] };
+    const dataset = db[categoria] || { turno1: EMPTY_TURNO, turno2: EMPTY_TURNO };
     const labels = DATE_LABELS[categoria] || ['Turno 1', 'Turno 2'];
     if (turno1Title) turno1Title.textContent = labels[0];
     if (turno2Title) turno2Title.textContent = labels[1];
-    renderLista(turno1List, dataset.turno1);
-    renderLista(turno2List, dataset.turno2);
+    renderMeta(turno1Meta, dataset.turno1);
+    renderMeta(turno2Meta, dataset.turno2);
+    renderLista(turno1List, dataset.turno1?.nominativi);
+    renderLista(turno2List, dataset.turno2?.nominativi);
   }
 
   function renderLista(container, nominativi) {
@@ -58,6 +63,29 @@
       const li = document.createElement('li');
       li.textContent = nome;
       container.appendChild(li);
+    }
+  }
+
+  function renderMeta(container, turno) {
+    if (!container) return;
+    container.innerHTML = '';
+    const rows = [
+      { label: 'Allenatore', value: turno?.allenatore || '-' },
+      { label: 'Palestra', value: turno?.palestra || '-' },
+      { label: 'Orario', value: turno?.orario || '-' },
+    ];
+    for (const row of rows) {
+      const div = document.createElement('div');
+      div.className = 'meta-row';
+      const lab = document.createElement('span');
+      lab.className = 'label';
+      lab.textContent = row.label + ':';
+      const val = document.createElement('span');
+      val.className = 'value';
+      val.textContent = row.value;
+      div.appendChild(lab);
+      div.appendChild(val);
+      container.appendChild(div);
     }
   }
 
@@ -81,8 +109,18 @@
   function normalize(section) {
     const safe = section && typeof section === 'object' ? section : {};
     return {
-      turno1: Array.isArray(safe.turno1) ? safe.turno1 : [],
-      turno2: Array.isArray(safe.turno2) ? safe.turno2 : [],
+      turno1: normalizeTurno(safe.turno1),
+      turno2: normalizeTurno(safe.turno2),
+    };
+  }
+
+  function normalizeTurno(turno) {
+    const t = turno && typeof turno === 'object' ? turno : {};
+    return {
+      allenatore: typeof t.allenatore === 'string' ? t.allenatore : '',
+      palestra: typeof t.palestra === 'string' ? t.palestra : '',
+      orario: typeof t.orario === 'string' ? t.orario : '',
+      nominativi: Array.isArray(t.nominativi) ? t.nominativi : [],
     };
   }
 

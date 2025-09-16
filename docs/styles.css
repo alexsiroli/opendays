@@ -79,6 +79,30 @@ body {
   color: var(--brand);
 }
 
+.turno-meta {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  margin: 8px 0 10px;
+  padding: 10px 12px;
+  background: #f3f4f6;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.turno-meta .meta-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+}
+
+.turno-meta .label {
+  min-width: 92px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
 ul.nominativi {
   list-style: none;
   padding: 0;

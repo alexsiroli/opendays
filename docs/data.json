@@ -1,15 +1,15 @@
 {
   "Maschile": {
-    "turno1": [],
-    "turno2": []
+    "turno1": { "allenatore": "", "palestra": "", "orario": "", "nominativi": [] },
+    "turno2": { "allenatore": "", "palestra": "", "orario": "", "nominativi": [] }
   },
   "Femminile": {
-    "turno1": [],
-    "turno2": []
+    "turno1": { "allenatore": "", "palestra": "", "orario": "", "nominativi": [] },
+    "turno2": { "allenatore": "", "palestra": "", "orario": "", "nominativi": [] }
   },
   "Misto": {
-    "turno1": [],
-    "turno2": []
+    "turno1": { "allenatore": "", "palestra": "", "orario": "", "nominativi": [] },
+    "turno2": { "allenatore": "", "palestra": "", "orario": "", "nominativi": [] }
   }
 }
 
