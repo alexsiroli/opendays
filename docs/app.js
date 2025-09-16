@@ -59,7 +59,10 @@
       container.appendChild(li);
       return;
     }
-    for (const nome of nominativi) {
+    const sorted = [...nominativi].sort((a, b) =>
+      String(a).localeCompare(String(b), 'it', { sensitivity: 'base' })
+    );
+    for (const nome of sorted) {
       const li = document.createElement('li');
       li.textContent = nome;
       container.appendChild(li);
