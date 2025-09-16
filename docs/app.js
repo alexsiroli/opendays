@@ -111,8 +111,8 @@
     addIcsBtn.textContent = 'Aggiungi a calendario (.ics)';
     addIcsBtn.addEventListener('click', function () {
       try {
-        const { start, end, location, title, description } = buildEventData(categoria, dateLabel, turno);
-        const ics = buildIcs({ start, end, title, location, description });
+        const { start, end, location, title, description, url } = buildEventData(categoria, dateLabel, turno);
+        const ics = buildIcs({ start, end, title, location, description, url });
         const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -153,13 +153,13 @@
 
   function buildEventData(categoria, dateLabel, turno) {
     const title = `Open Day ${categoria}`;
-    const { text: locText } = parsePalestra(turno?.palestra || '');
-    const location = locText || 'Da definire';
+    const { text: locText, url: locUrl } = parsePalestra(turno?.palestra || '');
+    const location = (locUrl && typeof locUrl === 'string') ? locUrl : (locText || 'Da definire');
     const year = new Date().getFullYear();
     const start = parseItalianDateTime(`${dateLabel} ${year}`, turno?.orario || '21:00');
     const end = new Date(start.getTime() + 90 * 60 * 1000);
     const description = `Allenatore: ${turno?.allenatore || '-'}\nCategoria: ${categoria}`;
-    return { start, end, location, title, description };
+    return { start, end, location, title, description, url: locUrl || '' };
   }
 
   function parseItalianDateTime(labelWithYear, timeHHmm) {
@@ -194,13 +194,13 @@
     );
   }
 
-  function buildIcs({ start, end, title, location, description }) {
+  function buildIcs({ start, end, title, location, description, url }) {
     const dtStart = toUtcBasic(start);
     const dtEnd = toUtcBasic(end);
     const uid = Math.random().toString(36).slice(2) + '@cusb-opendays';
     const now = toUtcBasic(new Date());
     const esc = s => (s || '').toString().replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/,/g, '\,').replace(/;/g, '\;');
-    return [
+    const lines = [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
       'PRODID:-//CUSB Open Days//IT',
@@ -214,9 +214,12 @@
       `SUMMARY:${esc(title)}`,
       `LOCATION:${esc(location)}`,
       `DESCRIPTION:${esc(description)}`,
-      'END:VEVENT',
-      'END:VCALENDAR',
-    ].join('\r\n');
+    ];
+    if (url) {
+      lines.push(`URL:${esc(url)}`);
+    }
+    lines.push('END:VEVENT', 'END:VCALENDAR');
+    return lines.join('\r\n');
   }
 
   function buildGoogleCalendarLink({ start, end, title, location, description }) {
