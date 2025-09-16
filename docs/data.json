@@ -58,13 +58,49 @@
       "allenatore": "Tobia Di Meo",
       "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)",
       "orario": "21:00",
-      "nominativi": []
+      "nominativi": [
+        "Balzoni Margherita",
+        "Levanetesi Elisa",
+        "Mastrilli Alice",
+        "Mori Letizia",
+        "Panariello Celine",
+        "Paradisi Sara",
+        "Rivara Greta",
+        "Savadori Erica",
+        "Zagnoli Sabrina",
+        "Tagliatesta Sofia",
+        "Severi Alessia",
+        "Amoruso Maria Luce",
+        "Passerini Cecilia",
+        "Serrani Arianna",
+        "Calisi Domiziana",
+        "Pignotti Roberta",
+        "Giuliani Elisa"
+      ]
     },
     "turno2": {
       "allenatore": "Tobia Di Meo",
       "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)",
       "orario": "21:00",
-      "nominativi": []
+      "nominativi": [
+        "Arienti Alicia",
+        "Valdiserri Sara",
+        "Valentini Laura",
+        "Molari Giorgia",
+        "Beccati Alice",
+        "Buccolini Lucia",
+        "Fattori Giorgia",
+        "Mordenti Alice",
+        "Pisano Maya",
+        "Sanchez Barbara",
+        "Sbrighi Margherita",
+        "Sirri Sofia",
+        "Visani Vittoria",
+        "Zanotti Chiara",
+        "Grazia Carlotta",
+        "Fabbri Benedetta",
+        "Sacchetti Valentina"
+      ]
     }
   },
   "Misto": {
@@ -95,7 +131,7 @@
     "turno2": {
       "allenatore": "Oscar Vitali",
       "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)",
-      "orario": "21:20",
+      "orario": "21:30",
       "nominativi": [
         "Baldoni Manuel",
         "Barchi Riccardo",
