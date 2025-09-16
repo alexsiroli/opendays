@@ -6,8 +6,6 @@
   const turno2Title = document.getElementById('turno2-title');
   const turno1Meta = document.getElementById('turno1-meta');
   const turno2Meta = document.getElementById('turno2-meta');
-  const searchInput = document.getElementById('search-input');
-  const searchReset = document.getElementById('search-reset');
 
   /**
    * Struttura dati attesa in data.json:
@@ -68,9 +66,6 @@
     const q = currentQuery.trim().toLowerCase();
     for (const nome of sorted) {
       const li = document.createElement('li');
-      if (q && nome.toLowerCase().includes(q)) {
-        li.classList.add('hl');
-      }
       li.textContent = nome;
       container.appendChild(li);
     }
@@ -290,23 +285,7 @@
     renderCategoria(categoria);
   });
 
-  if (searchInput && searchReset) {
-    searchInput.addEventListener('input', function () {
-      currentQuery = searchInput.value || '';
-      // ricalcola la vista corrente mantenendo categoria attiva
-      const active = segmented.querySelector('.segment.is-active');
-      const categoria = active ? active.getAttribute('data-cat') : 'Maschile';
-      renderCategoria(categoria);
-    });
-    searchReset.addEventListener('click', function () {
-      currentQuery = '';
-      searchInput.value = '';
-      const active = segmented.querySelector('.segment.is-active');
-      const categoria = active ? active.getAttribute('data-cat') : 'Maschile';
-      renderCategoria(categoria);
-      searchInput.focus();
-    });
-  }
+  // search UI removed
 
   (async function init() {
     await loadData();
