@@ -131,8 +131,8 @@
     googleBtn.textContent = 'Google Calendar';
     googleBtn.addEventListener('click', function () {
       try {
-        const { start, end, location, title, description } = buildEventData(categoria, dateLabel, turno);
-        const href = buildGoogleCalendarLink({ start, end, title, location, description });
+        const { start, end, location, title, description, url, displayLocation } = buildEventData(categoria, dateLabel, turno);
+        const href = buildGoogleCalendarLink({ start, end, title, location: displayLocation || location, description, url });
         window.open(href, '_blank', 'noopener');
       } catch (e) { console.warn('GCal error', e); }
     });
@@ -159,7 +159,7 @@
     const start = parseItalianDateTime(`${dateLabel} ${year}`, turno?.orario || '21:00');
     const end = new Date(start.getTime() + 90 * 60 * 1000);
     const description = `Allenatore: ${turno?.allenatore || '-'}\nCategoria: ${categoria}`;
-    return { start, end, location, title, description, url: locUrl || '' };
+    return { start, end, location, title, description, url: locUrl || '', displayLocation: locText || '' };
   }
 
   function parseItalianDateTime(labelWithYear, timeHHmm) {
@@ -222,14 +222,10 @@
     return lines.join('\r\n');
   }
 
-  function buildGoogleCalendarLink({ start, end, title, location, description }) {
+  function buildGoogleCalendarLink({ start, end, title, location, description, url }) {
     const dates = `${toUtcBasic(start)}/${toUtcBasic(end)}`;
-    const params = new URLSearchParams({
-      text: title,
-      dates,
-      location,
-      details: description,
-    });
+    const details = url ? `${description}\nLuogo: ${url}` : description;
+    const params = new URLSearchParams({ text: title, dates, location, details });
     return `https://calendar.google.com/calendar/r/eventedit?${params.toString()}`;
   }
 
