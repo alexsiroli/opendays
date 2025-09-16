@@ -2,6 +2,8 @@
   const turno1List = document.getElementById('turno1-list');
   const turno2List = document.getElementById('turno2-list');
   const segmented = document.querySelector('.segmented');
+  const turno1Title = document.getElementById('turno1-title');
+  const turno2Title = document.getElementById('turno2-title');
 
   /**
    * Struttura dati attesa in data.json:
@@ -19,8 +21,26 @@
 
   let db = EMPTY_DATA;
 
+  const DATE_LABELS = {
+    Maschile: [
+      'Mercoledi 24 settembre',
+      'Venerdi 26 settembre',
+    ],
+    Femminile: [
+      'Lunedi 22 settembre',
+      'Mercoledi 24 settembre',
+    ],
+    Misto: [
+      'Martedi 23 settembre',
+      'Giovedi 25 settembre',
+    ],
+  };
+
   function renderCategoria(categoria) {
     const dataset = db[categoria] || { turno1: [], turno2: [] };
+    const labels = DATE_LABELS[categoria] || ['Turno 1', 'Turno 2'];
+    if (turno1Title) turno1Title.textContent = labels[0];
+    if (turno2Title) turno2Title.textContent = labels[1];
     renderLista(turno1List, dataset.turno1);
     renderLista(turno2List, dataset.turno2);
   }
