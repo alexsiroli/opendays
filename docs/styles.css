@@ -25,6 +25,7 @@ body {
   padding: 16px 12px;
   border-bottom: 1px solid var(--border);
   background: var(--card);
+  text-align: center;
 }
 
 .page-header h1 {
@@ -34,7 +35,7 @@ body {
 }
 
 .segmented {
-  display: grid;
+  display: inline-grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
 }
@@ -55,6 +56,16 @@ body {
   outline: 2px solid var(--brand);
   outline-offset: 0;
 }
+
+/* Tab colors */
+.segment[data-cat="Maschile"] { background: #e6f2ff; border-color: #bfdbfe; }
+.segment[data-cat="Maschile"].is-active { outline-color: #3b82f6; }
+
+.segment[data-cat="Femminile"] { background: #ffe6f2; border-color: #fbcfe8; }
+.segment[data-cat="Femminile"].is-active { outline-color: #ec4899; }
+
+.segment[data-cat="Misto"] { background: #fff7cc; border-color: #fde68a; }
+.segment[data-cat="Misto"].is-active { outline-color: #eab308; }
 
 .turni-layout {
   display: grid;
