@@ -1,4 +1,4 @@
-# Open Days CSUB — Turni Squadre Agonistiche
+# Open Days CUSB — Turni Squadre Agonistiche
 
 Sito statico per pubblicare i turni degli Open Days (Maschile, Femminile, Misto) con due turni per categoria, ospitato su GitHub Pages.
 
