@@ -127,13 +127,10 @@ body {
   display: flex;
   gap: 8px;
   margin-top: 8px;
+  justify-content: center;
 }
 
-.cal-label {
-  margin-top: 4px;
-  font-size: 14px;
-  color: var(--muted);
-}
+
 
 .btn {
   appearance: none;

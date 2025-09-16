@@ -103,10 +103,6 @@
     }
 
     // Calendar section label
-    const calLabel = document.createElement('div');
-    calLabel.className = 'cal-label';
-    calLabel.textContent = 'Aggiungi a calendario';
-
     // Actions: calendar buttons
     const actions = document.createElement('div');
     actions.className = 'turno-actions';
@@ -144,7 +140,6 @@
 
     actions.appendChild(addIcsBtn);
     actions.appendChild(googleBtn);
-    container.appendChild(calLabel);
     container.appendChild(actions);
   }
 
