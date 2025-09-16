@@ -8,15 +8,12 @@
   </head>
   <body>
     <header class="page-header">
-      <h1>Open Days CSUB — Turni Squadre Agonistiche</h1>
-      <div class="selector-group">
-        <label for="categoria-select">Categoria:</label>
-        <select id="categoria-select" aria-label="Seleziona categoria">
-          <option value="Maschile">Maschile</option>
-          <option value="Femminile">Femminile</option>
-          <option value="Misto">Misto</option>
-        </select>
-      </div>
+      <h1>Open Days CSUB</h1>
+      <nav class="segmented" aria-label="Seleziona categoria">
+        <button class="segment is-active" data-cat="Maschile" aria-pressed="true">Maschile</button>
+        <button class="segment" data-cat="Femminile" aria-pressed="false">Femminile</button>
+        <button class="segment" data-cat="Misto" aria-pressed="false">Misto</button>
+      </nav>
     </header>
 
     <main class="turni-layout" id="turni-layout" aria-live="polite">
@@ -31,10 +28,7 @@
     </main>
 
     <footer class="page-footer">
-      <p>
-        Dati caricati da <code>docs/data.json</code>. Per modifiche, aggiornare quel file e
-        ricaricare la pagina.
-      </p>
+      <p>Dati da <code>docs/data.json</code></p>
     </footer>
 
     <script src="app.js"></script>

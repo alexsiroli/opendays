@@ -1,7 +1,7 @@
 (function () {
-  const categoriaSelect = document.getElementById('categoria-select');
   const turno1List = document.getElementById('turno1-list');
   const turno2List = document.getElementById('turno2-list');
+  const segmented = document.querySelector('.segmented');
 
   /**
    * Struttura dati attesa in data.json:
@@ -66,13 +66,21 @@
     };
   }
 
-  categoriaSelect.addEventListener('change', function () {
-    renderCategoria(categoriaSelect.value);
+  segmented.addEventListener('click', function (e) {
+    const btn = e.target.closest('.segment');
+    if (!btn) return;
+    for (const el of segmented.querySelectorAll('.segment')) {
+      el.classList.toggle('is-active', el === btn);
+      el.setAttribute('aria-pressed', el === btn ? 'true' : 'false');
+    }
+    const categoria = btn.getAttribute('data-cat');
+    renderCategoria(categoria);
   });
 
   (async function init() {
     await loadData();
-    renderCategoria(categoriaSelect.value);
+    const active = segmented.querySelector('.segment.is-active');
+    renderCategoria(active ? active.getAttribute('data-cat') : 'Maschile');
   })();
 })();
 
