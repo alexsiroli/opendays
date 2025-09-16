@@ -1,15 +1,45 @@
 {
   "Maschile": {
-    "turno1": { "allenatore": "", "palestra": "", "orario": "", "nominativi": [] },
-    "turno2": { "allenatore": "", "palestra": "", "orario": "", "nominativi": [] }
+    "turno1": {
+      "allenatore": "Nicolò Faenza",
+      "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)",
+      "orario": "21:30",
+      "nominativi": []
+    },
+    "turno2": {
+      "allenatore": "Nicolò Faenza",
+      "palestra": "Plauto (https://maps.app.goo.gl/UhLcCCnk4CNCHAF46?g_st=ipc)",
+      "orario": "21:00",
+      "nominativi": []
+    }
   },
   "Femminile": {
-    "turno1": { "allenatore": "", "palestra": "", "orario": "", "nominativi": [] },
-    "turno2": { "allenatore": "", "palestra": "", "orario": "", "nominativi": [] }
+    "turno1": {
+      "allenatore": "Tobia Di Meo",
+      "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)",
+      "orario": "21:00",
+      "nominativi": []
+    },
+    "turno2": {
+      "allenatore": "Tobia Di Meo",
+      "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)",
+      "orario": "21:00",
+      "nominativi": []
+    }
   },
   "Misto": {
-    "turno1": { "allenatore": "", "palestra": "", "orario": "", "nominativi": [] },
-    "turno2": { "allenatore": "", "palestra": "", "orario": "", "nominativi": [] }
+    "turno1": {
+      "allenatore": "Oscar Vitali",
+      "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)",
+      "orario": "21:00",
+      "nominativi": []
+    },
+    "turno2": {
+      "allenatore": "Oscar Vitali",
+      "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)",
+      "orario": "21:20",
+      "nominativi": []
+    }
   }
 }
 
