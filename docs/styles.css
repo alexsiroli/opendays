@@ -129,6 +129,12 @@ body {
   margin-top: 8px;
 }
 
+.cal-label {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
 .btn {
   appearance: none;
   -webkit-appearance: none;

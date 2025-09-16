@@ -102,13 +102,18 @@
       container.appendChild(div);
     }
 
+    // Calendar section label
+    const calLabel = document.createElement('div');
+    calLabel.className = 'cal-label';
+    calLabel.textContent = 'Aggiungi a calendario';
+
     // Actions: calendar buttons
     const actions = document.createElement('div');
     actions.className = 'turno-actions';
     const addIcsBtn = document.createElement('button');
     addIcsBtn.type = 'button';
     addIcsBtn.className = 'btn';
-    addIcsBtn.textContent = 'Aggiungi a calendario (.ics)';
+    addIcsBtn.textContent = 'Apple Calendar';
     addIcsBtn.addEventListener('click', function () {
       try {
         const { start, end, location, title, description, url } = buildEventData(categoria, dateLabel, turno);
@@ -139,6 +144,7 @@
 
     actions.appendChild(addIcsBtn);
     actions.appendChild(googleBtn);
+    container.appendChild(calLabel);
     container.appendChild(actions);
   }
 
@@ -214,11 +220,6 @@
       `SUMMARY:${esc(title)}`,
       `LOCATION:${esc(location)}`,
       `DESCRIPTION:${esc(description)}`,
-      'BEGIN:VALARM',
-      'TRIGGER:-PT30M',
-      'ACTION:DISPLAY',
-      `DESCRIPTION:${esc('Promemoria: ' + title)}`,
-      'END:VALARM',
     ];
     if (url) {
       lines.push(`URL:${esc(url)}`);
