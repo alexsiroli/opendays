@@ -103,6 +103,15 @@ body {
   font-weight: 600;
 }
 
+.turno-meta .value a {
+  color: var(--brand);
+  text-decoration: none;
+}
+
+.turno-meta .value a:hover {
+  text-decoration: underline;
+}
+
 ul.nominativi {
   list-style: none;
   padding: 0;

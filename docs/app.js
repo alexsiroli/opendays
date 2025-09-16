@@ -82,11 +82,34 @@
       lab.textContent = row.label + ':';
       const val = document.createElement('span');
       val.className = 'value';
-      val.textContent = row.value;
+      if (row.label === 'Palestra') {
+        const { text, url } = parsePalestra(row.value);
+        if (url) {
+          const a = document.createElement('a');
+          a.href = url;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.textContent = text || 'Mappa';
+          val.appendChild(a);
+        } else {
+          val.textContent = text;
+        }
+      } else {
+        val.textContent = row.value;
+      }
       div.appendChild(lab);
       div.appendChild(val);
       container.appendChild(div);
     }
+  }
+
+  function parsePalestra(raw) {
+    if (!raw || typeof raw !== 'string') return { text: '-', url: '' };
+    // Trova URL http/https
+    const urlMatch = raw.match(/https?:\/\/\S+/);
+    const url = urlMatch ? urlMatch[0].replace(/[),.]+$/, '') : '';
+    const text = url ? raw.replace(url, '').trim().replace(/[()]/g, '').trim() : raw;
+    return { text: text || 'Palestra', url };
   }
 
   async function loadData() {
