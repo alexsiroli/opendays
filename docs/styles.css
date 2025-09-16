@@ -40,6 +40,21 @@ body {
   gap: 8px;
 }
 
+.search-bar {
+  margin-top: 8px;
+  display: inline-flex;
+  gap: 8px;
+}
+
+#search-input {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--text);
+  min-width: 220px;
+}
+
 .segment {
   appearance: none;
   -webkit-appearance: none;
@@ -162,6 +177,10 @@ ul.nominativi li {
   border-radius: 10px;
   background: #fafafa;
   font-size: 15px;
+}
+
+.hl {
+  background: #fff3bf;
 }
 
 .vuoto {
