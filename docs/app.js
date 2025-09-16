@@ -114,14 +114,14 @@
         const { start, end, location, title, description, url } = buildEventData(categoria, dateLabel, turno);
         const ics = buildIcs({ start, end, title, location, description, url });
         const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
+        const objectUrl = URL.createObjectURL(blob);
         const a = document.createElement('a');
-        a.href = url;
+        a.href = objectUrl;
         a.download = `${sanitizeFileName(title)}.ics`;
         document.body.appendChild(a);
         a.click();
         a.remove();
-        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
       } catch (e) { console.warn('ICS error', e); }
     });
 
