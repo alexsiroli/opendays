@@ -44,8 +44,8 @@
     const labels = DATE_LABELS[categoria] || ['Turno 1', 'Turno 2'];
     if (turno1Title) turno1Title.textContent = labels[0];
     if (turno2Title) turno2Title.textContent = labels[1];
-    renderMeta(turno1Meta, dataset.turno1);
-    renderMeta(turno2Meta, dataset.turno2);
+    renderMeta(turno1Meta, dataset.turno1, categoria, labels[0]);
+    renderMeta(turno2Meta, dataset.turno2, categoria, labels[1]);
     renderLista(turno1List, dataset.turno1?.nominativi);
     renderLista(turno2List, dataset.turno2?.nominativi);
   }
@@ -66,7 +66,7 @@
     }
   }
 
-  function renderMeta(container, turno) {
+  function renderMeta(container, turno, categoria, dateLabel) {
     if (!container) return;
     container.innerHTML = '';
     const rows = [
@@ -101,6 +101,45 @@
       div.appendChild(val);
       container.appendChild(div);
     }
+
+    // Actions: calendar buttons
+    const actions = document.createElement('div');
+    actions.className = 'turno-actions';
+    const addIcsBtn = document.createElement('button');
+    addIcsBtn.type = 'button';
+    addIcsBtn.className = 'btn';
+    addIcsBtn.textContent = 'Aggiungi a calendario (.ics)';
+    addIcsBtn.addEventListener('click', function () {
+      try {
+        const { start, end, location, title, description } = buildEventData(categoria, dateLabel, turno);
+        const ics = buildIcs({ start, end, title, location, description });
+        const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${sanitizeFileName(title)}.ics`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      } catch (e) { console.warn('ICS error', e); }
+    });
+
+    const googleBtn = document.createElement('button');
+    googleBtn.type = 'button';
+    googleBtn.className = 'btn outline';
+    googleBtn.textContent = 'Google Calendar';
+    googleBtn.addEventListener('click', function () {
+      try {
+        const { start, end, location, title, description } = buildEventData(categoria, dateLabel, turno);
+        const href = buildGoogleCalendarLink({ start, end, title, location, description });
+        window.open(href, '_blank', 'noopener');
+      } catch (e) { console.warn('GCal error', e); }
+    });
+
+    actions.appendChild(addIcsBtn);
+    actions.appendChild(googleBtn);
+    container.appendChild(actions);
   }
 
   function parsePalestra(raw) {
@@ -110,6 +149,89 @@
     const url = urlMatch ? urlMatch[0].replace(/[),.]+$/, '') : '';
     const text = url ? raw.replace(url, '').trim().replace(/[()]/g, '').trim() : raw;
     return { text: text || 'Palestra', url };
+  }
+
+  function buildEventData(categoria, dateLabel, turno) {
+    const title = `Open Day ${categoria}`;
+    const { text: locText } = parsePalestra(turno?.palestra || '');
+    const location = locText || 'Da definire';
+    const year = new Date().getFullYear();
+    const start = parseItalianDateTime(`${dateLabel} ${year}`, turno?.orario || '21:00');
+    const end = new Date(start.getTime() + 90 * 60 * 1000);
+    const description = `Allenatore: ${turno?.allenatore || '-'}\nCategoria: ${categoria}`;
+    return { start, end, location, title, description };
+  }
+
+  function parseItalianDateTime(labelWithYear, timeHHmm) {
+    // Esempio: "Mercoledi 24 settembre 2025" + "21:30"
+    const months = {
+      gennaio: 0, febbraio: 1, marzo: 2, aprile: 3, maggio: 4, giugno: 5,
+      luglio: 6, agosto: 7, settembre: 8, ottobre: 9, novembre: 10, dicembre: 11,
+    };
+    const parts = labelWithYear.toLowerCase().split(/\s+/);
+    // trova giorno numero e mese
+    let day = 1, month = 0, year = new Date().getFullYear();
+    for (let i = 0; i < parts.length; i++) {
+      const p = parts[i];
+      if (/^\d{1,2}$/.test(p)) day = parseInt(p, 10);
+      if (months[p] !== undefined) month = months[p];
+      if (/^\d{4}$/.test(p)) year = parseInt(p, 10);
+    }
+    const [hh, mm] = (timeHHmm || '21:00').split(':').map(x => parseInt(x, 10));
+    return new Date(year, month, day, hh, mm || 0, 0);
+  }
+
+  function toUtcBasic(dt) {
+    // YYYYMMDDTHHMMSSZ
+    const pad = n => String(n).padStart(2, '0');
+    return (
+      dt.getUTCFullYear().toString() +
+      pad(dt.getUTCMonth() + 1) +
+      pad(dt.getUTCDate()) + 'T' +
+      pad(dt.getUTCHours()) +
+      pad(dt.getUTCMinutes()) +
+      pad(dt.getUTCSeconds()) + 'Z'
+    );
+  }
+
+  function buildIcs({ start, end, title, location, description }) {
+    const dtStart = toUtcBasic(start);
+    const dtEnd = toUtcBasic(end);
+    const uid = Math.random().toString(36).slice(2) + '@cusb-opendays';
+    const now = toUtcBasic(new Date());
+    const esc = s => (s || '').toString().replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/,/g, '\,').replace(/;/g, '\;');
+    return [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//CUSB Open Days//IT',
+      'CALSCALE:GREGORIAN',
+      'METHOD:PUBLISH',
+      'BEGIN:VEVENT',
+      `UID:${uid}`,
+      `DTSTAMP:${now}`,
+      `DTSTART:${dtStart}`,
+      `DTEND:${dtEnd}`,
+      `SUMMARY:${esc(title)}`,
+      `LOCATION:${esc(location)}`,
+      `DESCRIPTION:${esc(description)}`,
+      'END:VEVENT',
+      'END:VCALENDAR',
+    ].join('\r\n');
+  }
+
+  function buildGoogleCalendarLink({ start, end, title, location, description }) {
+    const dates = `${toUtcBasic(start)}/${toUtcBasic(end)}`;
+    const params = new URLSearchParams({
+      text: title,
+      dates,
+      location,
+      details: description,
+    });
+    return `https://calendar.google.com/calendar/r/eventedit?${params.toString()}`;
+  }
+
+  function sanitizeFileName(name) {
+    return (name || 'evento').replace(/\s+/g, '_').replace(/[^\w.-]/g, '');
   }
 
   async function loadData() {

@@ -123,6 +123,27 @@ body {
   text-decoration: underline;
 }
 
+.turno-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.btn {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.btn.outline {
+  background: #f9fafb;
+}
+
 ul.nominativi {
   list-style: none;
   padding: 0;
