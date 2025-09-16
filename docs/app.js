@@ -214,6 +214,11 @@
       `SUMMARY:${esc(title)}`,
       `LOCATION:${esc(location)}`,
       `DESCRIPTION:${esc(description)}`,
+      'BEGIN:VALARM',
+      'TRIGGER:-PT30M',
+      'ACTION:DISPLAY',
+      `DESCRIPTION:${esc('Promemoria: ' + title)}`,
+      'END:VALARM',
     ];
     if (url) {
       lines.push(`URL:${esc(url)}`);
