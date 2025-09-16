@@ -154,7 +154,7 @@
   function buildEventData(categoria, dateLabel, turno) {
     const title = `Open Day ${categoria}`;
     const { text: locText, url: locUrl } = parsePalestra(turno?.palestra || '');
-    const location = (locUrl && typeof locUrl === 'string') ? locUrl : (locText || 'Da definire');
+    const location = locText || 'Da definire';
     const year = new Date().getFullYear();
     const start = parseItalianDateTime(`${dateLabel} ${year}`, turno?.orario || '21:00');
     const end = new Date(start.getTime() + 90 * 60 * 1000);
