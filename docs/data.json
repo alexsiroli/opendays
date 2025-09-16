@@ -72,13 +72,49 @@
       "allenatore": "Oscar Vitali",
       "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)",
       "orario": "21:00",
-      "nominativi": []
+      "nominativi": [
+        "Martini Alessandro",
+        "Mondardini Marco",
+        "Serrani Francesco",
+        "Raffaeli Simone",
+        "Mongiusti Luca",
+        "Aguzzoni Giuseppe",
+        "Bonomi RIccardo",
+        "Agostini Alessia",
+        "Grandi Sofia",
+        "Balzoni Margherita",
+        "Levanetesi Elisa",
+        "Panariello Celine",
+        "Paradisi Sara",
+        "Rivara Greta",
+        "Valdiserri Sara",
+        "Zagnoli Sabrina",
+        "Tagliatesta Sofia"
+      ]
     },
     "turno2": {
       "allenatore": "Oscar Vitali",
       "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)",
-      "orario": "21:30",
-      "nominativi": []
+      "orario": "21:20",
+      "nominativi": [
+        "Baldoni Manuel",
+        "Barchi Riccardo",
+        "Mariani Federico",
+        "Werpers Lasse",
+        "Barbieri Della Chiesa Enrico",
+        "Avenali Paolo",
+        "Cifarelli Simone",
+        "Rossetti Domenico",
+        "Ciccarelli Lisa",
+        "Golinucci Chiara",
+        "Lanzoni Gaia Luna",
+        "Arienti Alicia",
+        "Mastrilli Alice",
+        "Mori Letizia",
+        "Savadori Erica",
+        "Valentini Laura",
+        "Molari Giorgia"
+      ]
     }
   }
 }
