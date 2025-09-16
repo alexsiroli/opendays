@@ -4,13 +4,53 @@
       "allenatore": "Nicolò Faenza",
       "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)",
       "orario": "21:30",
-      "nominativi": []
+      "nominativi": [
+        "Colinucci Nicolas",
+        "Zignani Filippo",
+        "Sodero Giulio",
+        "Canali Mattia",
+        "Campagna Nicholas",
+        "Savadori Luca",
+        "Siroli Alex",
+        "Baldoni Manuel",
+        "Barchi Riccardo",
+        "Mariani Federico",
+        "Martini Alessandro",
+        "Mondardini Marco",
+        "Serrani Francesco",
+        "Raffaeli Simone",
+        "Werpers Lasse",
+        "Barbieri Della Chiesa Enrico",
+        "Mongiusti Luca",
+        "Avenali Paolo",
+        "Aguzzoni Giuseppe"
+      ]
     },
     "turno2": {
       "allenatore": "Nicolò Faenza",
       "palestra": "Plauto (https://maps.app.goo.gl/UhLcCCnk4CNCHAF46?g_st=ipc)",
       "orario": "21:00",
-      "nominativi": []
+      "nominativi": [
+        "Colinucci Nicolas",
+        "Zignani Filippo",
+        "Sodero Giulio",
+        "Canali Mattia",
+        "Campagna Nicholas",
+        "Savadori Luca",
+        "Siroli Alex",
+        "Baldoni Manuel",
+        "Barchi Riccardo",
+        "Mariani Federico",
+        "Martini Alessandro",
+        "Mondardini Marco",
+        "Serrani Francesco",
+        "Raffaeli Simone",
+        "Werpers Lasse",
+        "Barbieri Della Chiesa Enrico",
+        "Mongiusti Luca",
+        "Avenali Paolo",
+        "Aguzzoni Giuseppe"
+      ]
     }
   },
   "Femminile": {
