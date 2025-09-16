@@ -43,6 +43,7 @@
   function renderCategoria(categoria) {
     const dataset = db[categoria] || { turno1: EMPTY_TURNO, turno2: EMPTY_TURNO };
     const labels = DATE_LABELS[categoria] || ['Turno 1', 'Turno 2'];
+    document.body.setAttribute('data-cat', categoria);
     if (turno1Title) turno1Title.textContent = labels[0];
     if (turno2Title) turno2Title.textContent = labels[1];
     renderMeta(turno1Meta, dataset.turno1, categoria, labels[0]);

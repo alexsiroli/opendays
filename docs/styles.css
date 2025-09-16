@@ -5,6 +5,11 @@
   --muted: #6b7280;
   --brand: #2563eb;
   --border: #e5e7eb;
+  --turn-maschile: #e6f2ff;
+  --turn-femminile: #ffe6f2;
+  --turn-misto: #fff7cc;
+  --row-even: #f8fafc;
+  --row-odd: #eef2f7;
 }
 
 * { box-sizing: border-box; }
@@ -86,6 +91,11 @@ body {
   box-shadow: 0 1px 2px rgba(0,0,0,0.04);
 }
 
+/* Colorazione per categoria attiva */
+body[data-cat="Maschile"] .turno { border-color: #bfdbfe; box-shadow: 0 0 0 2px rgba(191,219,254,0.3) inset; }
+body[data-cat="Femminile"] .turno { border-color: #fbcfe8; box-shadow: 0 0 0 2px rgba(251,207,232,0.3) inset; }
+body[data-cat="Misto"] .turno { border-color: #fde68a; box-shadow: 0 0 0 2px rgba(253,230,138,0.35) inset; }
+
 .turno h2 {
   margin: 0 0 8px;
   font-size: 15px;
@@ -155,15 +165,22 @@ ul.nominativi {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 0;
 }
 
 ul.nominativi li {
   padding: 8px 10px;
-  border: 1px dashed var(--border);
-  border-radius: 10px;
-  background: #fafafa;
+  border-bottom: 1px dashed var(--border);
+  background: var(--row-even);
   font-size: 15px;
+}
+
+ul.nominativi li:nth-child(odd) {
+  background: var(--row-odd);
+}
+
+ul.nominativi li:first-child {
+  border-top: 1px dashed var(--border);
 }
 
 /* highlight removed */
