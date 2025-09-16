@@ -1,7 +1,7 @@
 {
   "Maschile": {
     "turno1": {
-      "allenatore": "Nicolò Faenza",
+      "allenatore": "Nicola Faenza",
       "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)",
       "orario": "21:30",
       "nominativi": [
@@ -26,7 +26,7 @@
       ]
     },
     "turno2": {
-      "allenatore": "Nicolò Faenza",
+      "allenatore": "Nicola Faenza",
       "palestra": "Plauto (https://maps.app.goo.gl/UhLcCCnk4CNCHAF46?g_st=ipc)",
       "orario": "21:00",
       "nominativi": [
@@ -38,11 +38,9 @@
         "Savadori Luca",
         "Siroli Alex",
         "Baldoni Manuel",
-        "Barchi Riccardo",
         "Mariani Federico",
         "Martini Alessandro",
         "Mondardini Marco",
-        "Serrani Francesco",
         "Raffaeli Simone",
         "Barbieri Della Chiesa Enrico",
         
