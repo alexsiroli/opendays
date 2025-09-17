@@ -8,6 +8,7 @@
   --turn-maschile: #e6f2ff;
   --turn-femminile: #ffe6f2;
   --turn-misto: #fff7cc;
+  --turn-base: #dcfce7;
   --row-even: #f8fafc;
   --row-odd: #eef2f7;
 }
@@ -95,6 +96,9 @@ body {
 body[data-cat="Maschile"] .turno { border-color: #bfdbfe; box-shadow: 0 0 0 2px rgba(191,219,254,0.3) inset; }
 body[data-cat="Femminile"] .turno { border-color: #fbcfe8; box-shadow: 0 0 0 2px rgba(251,207,232,0.3) inset; }
 body[data-cat="Misto"] .turno { border-color: #fde68a; box-shadow: 0 0 0 2px rgba(253,230,138,0.35) inset; }
+body[data-cat="Base"] .turno { border-color: #86efac; box-shadow: 0 0 0 2px rgba(134,239,172,0.35) inset; }
+.segment[data-cat="Base"] { background: #eaffef; border-color: #bbf7d0; }
+.segment[data-cat="Base"].is-active { outline-color: #22c55e; }
 
 .turno h2 {
   margin: 0 0 8px;

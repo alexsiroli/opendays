@@ -149,6 +149,21 @@
       ]
     }
   }
+  ,
+  "Base": {
+    "turno1": {
+      "allenatore": "",
+      "palestra": "",
+      "orario": "",
+      "nominativi": []
+    },
+    "turno2": {
+      "allenatore": "",
+      "palestra": "",
+      "orario": "",
+      "nominativi": []
+    }
+  }
 }
 
 

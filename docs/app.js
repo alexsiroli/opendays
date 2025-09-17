@@ -38,14 +38,22 @@
       'Martedi 23 settembre',
       'Giovedi 25 settembre',
     ],
+    Base: [
+      'Data',
+      null,
+    ],
   };
 
   function renderCategoria(categoria) {
     const dataset = db[categoria] || { turno1: EMPTY_TURNO, turno2: EMPTY_TURNO };
     const labels = DATE_LABELS[categoria] || ['Turno 1', 'Turno 2'];
     document.body.setAttribute('data-cat', categoria);
-    if (turno1Title) turno1Title.textContent = labels[0];
-    if (turno2Title) turno2Title.textContent = labels[1];
+    if (turno1Title) turno1Title.textContent = labels[0] || 'Turno 1';
+    if (turno2Title) turno2Title.textContent = labels[1] || 'Turno 2';
+    const turno2Section = document.getElementById('turno2');
+    if (turno2Section) {
+      turno2Section.style.display = labels[1] ? '' : 'none';
+    }
     renderMeta(turno1Meta, dataset.turno1, categoria, labels[0]);
     renderMeta(turno2Meta, dataset.turno2, categoria, labels[1]);
     renderLista(turno1List, dataset.turno1?.nominativi);
