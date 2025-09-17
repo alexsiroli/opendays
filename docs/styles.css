@@ -98,6 +98,11 @@ body[data-cat="Femminile"] .turno { border-color: #fbcfe8; box-shadow: 0 0 0 2px
 body[data-cat="Misto"] .turno { border-color: #fde68a; box-shadow: 0 0 0 2px rgba(253,230,138,0.35) inset; }
 body[data-cat="Base"] .turno { border-color: #86efac; box-shadow: 0 0 0 2px rgba(134,239,172,0.35) inset; }
 body[data-cat="Base"] .turno h2 { color: #16a34a; }
+/* Rendere il riquadro chiaramente verde per Base */
+body[data-cat="Base"] .turno { background: #f0fdf4; }
+/* Righe alternate leggermente verdi per Base */
+body[data-cat="Base"] ul.nominativi li { background: #ebfef2; }
+body[data-cat="Base"] ul.nominativi li:nth-child(odd) { background: #e3fde9; }
 .segment[data-cat="Base"] { background: #eaffef; border-color: #86efac; }
 .segment[data-cat="Base"].is-active { outline-color: #22c55e; }
 
