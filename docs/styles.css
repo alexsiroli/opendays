@@ -98,8 +98,20 @@ body {
 
 /* Colorazione per categoria attiva */
 body[data-cat="Maschile"] .turno { border-color: #bfdbfe; box-shadow: 0 0 0 2px rgba(191,219,254,0.3) inset; }
+body[data-cat="Maschile"] .turno { background: #eff6ff; }
+body[data-cat="Maschile"] .turno h2 { color: #3b82f6; }
+body[data-cat="Maschile"] ul.nominativi li { background: #eaf2ff; }
+body[data-cat="Maschile"] ul.nominativi li:nth-child(odd) { background: #e2ecff; }
 body[data-cat="Femminile"] .turno { border-color: #fbcfe8; box-shadow: 0 0 0 2px rgba(251,207,232,0.3) inset; }
+body[data-cat="Femminile"] .turno { background: #fff1f7; }
+body[data-cat="Femminile"] .turno h2 { color: #ec4899; }
+body[data-cat="Femminile"] ul.nominativi li { background: #ffe7f2; }
+body[data-cat="Femminile"] ul.nominativi li:nth-child(odd) { background: #ffdeee; }
 body[data-cat="Misto"] .turno { border-color: #fde68a; box-shadow: 0 0 0 2px rgba(253,230,138,0.35) inset; }
+body[data-cat="Misto"] .turno { background: #fffbeb; }
+body[data-cat="Misto"] .turno h2 { color: #eab308; }
+body[data-cat="Misto"] ul.nominativi li { background: #fff4cf; }
+body[data-cat="Misto"] ul.nominativi li:nth-child(odd) { background: #ffefb8; }
 body[data-cat="Base"] .turno { border-color: #86efac; box-shadow: 0 0 0 2px rgba(134,239,172,0.35) inset; }
 body[data-cat="Base"] .turno h2 { color: #16a34a; }
 /* Rendere il riquadro chiaramente verde per Base */
