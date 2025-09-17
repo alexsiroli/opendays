@@ -27,28 +27,11 @@
   let db = EMPTY_DATA;
   let currentQuery = '';
 
-  const DATE_LABELS = {
-    Maschile: [
-      'Mercoledi 24 settembre',
-      'Venerdi 26 settembre',
-    ],
-    Femminile: [
-      'Lunedi 22 settembre',
-      'Mercoledi 24 settembre',
-    ],
-    Misto: [
-      'Martedi 23 settembre',
-      'Giovedi 25 settembre',
-    ],
-    Base: [
-      'Turno 1',
-      null,
-    ],
-  };
+  // Le etichette dei turni vengono ora lette da data.json (campo ISO "data")
 
   function renderCategoria(categoria) {
     const dataset = db[categoria] || { turno1: EMPTY_TURNO, turno2: EMPTY_TURNO };
-    const labels = DATE_LABELS[categoria] || ['Turno 1', 'Turno 2'];
+    const labels = [formatItalianDate(dataset.turno1?.data) || 'Turno 1', formatItalianDate(dataset.turno2?.data) || null];
     document.body.setAttribute('data-cat', categoria);
     if (turno1Title) turno1Title.textContent = labels[0] || 'Turno 1';
     if (turno2Title) turno2Title.textContent = labels[1] || 'Turno 2';
@@ -185,8 +168,7 @@
     const title = `Open Day ${categoria}`;
     const { text: locText, url: locUrl } = parsePalestra(turno?.palestra || '');
     const location = locText || 'Da definire';
-    const year = new Date().getFullYear();
-    const start = parseItalianDateTime(`${dateLabel} ${year}`, turno?.orario || '21:00');
+    const start = buildDateFromIsoAndTime(turno?.data, turno?.orario || '21:00');
     const end = new Date(start.getTime() + 90 * 60 * 1000);
     const description = `Allenatore: ${turno?.allenatore || '-'}\nCategoria: ${categoria}`;
     return { start, end, location, title, description, url: locUrl || '', displayLocation: locText || '' };
@@ -209,6 +191,28 @@
     }
     const [hh, mm] = (timeHHmm || '21:00').split(':').map(x => parseInt(x, 10));
     return new Date(year, month, day, hh, mm || 0, 0);
+  }
+
+  function buildDateFromIsoAndTime(isoDate, timeHHmm) {
+    // isoDate atteso: YYYY-MM-DD
+    if (!isoDate) {
+      // fallback: oggi alle HH:mm
+      const now = new Date();
+      const [hh, mm] = (timeHHmm || '21:00').split(':').map(x => parseInt(x, 10));
+      return new Date(now.getFullYear(), now.getMonth(), now.getDate(), hh || 21, mm || 0, 0);
+    }
+    const [y, m, d] = isoDate.split('-').map(x => parseInt(x, 10));
+    const [hh, mm] = (timeHHmm || '21:00').split(':').map(x => parseInt(x, 10));
+    return new Date(y, (m - 1), d, hh || 21, mm || 0, 0);
+  }
+
+  function formatItalianDate(isoDate) {
+    if (!isoDate) return '';
+    const months = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+    const weekdays = ['Domenica','Lunedi','Martedi','Mercoledi','Giovedi','Venerdi','Sabato'];
+    const [y, m, d] = isoDate.split('-').map(n => parseInt(n, 10));
+    const dt = new Date(y, m - 1, d);
+    return `${weekdays[dt.getDay()]} ${d} ${months[m - 1]}`;
   }
 
   function toUtcBasic(dt) {
