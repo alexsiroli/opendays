@@ -149,7 +149,7 @@
   }
 
   function buildEventData(categoria, dateLabel, turno) {
-    const title = `Open Day ${categoria}`;
+    const title = 'Open Day Pallavolo CUSB';
     const { text: locText, url: locUrl } = parsePalestra(turno?.palestra || '');
     const location = locText || 'Da definire';
     const start = buildDateFromIsoAndTime(turno?.data, turno?.orario || '21:00');
@@ -280,6 +280,7 @@
   function normalizeTurno(turno) {
     const t = turno && typeof turno === 'object' ? turno : {};
     return {
+      data: typeof t.data === 'string' ? t.data : '',
       allenatore: typeof t.allenatore === 'string' ? t.allenatore : '',
       palestra: typeof t.palestra === 'string' ? t.palestra : '',
       orario: typeof t.orario === 'string' ? t.orario : '',
