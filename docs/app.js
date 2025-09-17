@@ -39,7 +39,7 @@
       'Giovedi 25 settembre',
     ],
     Base: [
-      'Data',
+      'Martedi 30 settembre',
       null,
     ],
   };

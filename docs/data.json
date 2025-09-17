@@ -152,9 +152,9 @@
   ,
   "Base": {
     "turno1": {
-      "allenatore": "",
-      "palestra": "",
-      "orario": "",
+      "allenatore": "Samuele Sirri",
+      "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)",
+      "orario": "21:00",
       "nominativi": []
     },
     "turno2": {
