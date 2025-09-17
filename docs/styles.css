@@ -97,7 +97,8 @@ body[data-cat="Maschile"] .turno { border-color: #bfdbfe; box-shadow: 0 0 0 2px 
 body[data-cat="Femminile"] .turno { border-color: #fbcfe8; box-shadow: 0 0 0 2px rgba(251,207,232,0.3) inset; }
 body[data-cat="Misto"] .turno { border-color: #fde68a; box-shadow: 0 0 0 2px rgba(253,230,138,0.35) inset; }
 body[data-cat="Base"] .turno { border-color: #86efac; box-shadow: 0 0 0 2px rgba(134,239,172,0.35) inset; }
-.segment[data-cat="Base"] { background: #eaffef; border-color: #bbf7d0; }
+body[data-cat="Base"] .turno h2 { color: #16a34a; }
+.segment[data-cat="Base"] { background: #eaffef; border-color: #86efac; }
 .segment[data-cat="Base"].is-active { outline-color: #22c55e; }
 
 .turno h2 {
