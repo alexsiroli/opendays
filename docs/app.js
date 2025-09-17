@@ -1,13 +1,10 @@
 (function () {
-  const turno1List = document.getElementById('turno1-list');
-  const turno2List = document.getElementById('turno2-list');
+  const turnList = document.getElementById('turn-list');
   const segmented = document.querySelector('.segmented');
   const turnSelector = document.querySelector('.turn-selector');
   let currentTurn = null; // nessun turno selezionato all'ingresso
-  const turno1Title = document.getElementById('turno1-title');
-  const turno2Title = document.getElementById('turno2-title');
-  const turno1Meta = document.getElementById('turno1-meta');
-  const turno2Meta = document.getElementById('turno2-meta');
+  const turnTitle = document.getElementById('turn-title');
+  const turnMeta = document.getElementById('turn-meta');
 
   /**
    * Struttura dati attesa in data.json:
@@ -22,6 +19,7 @@
     Maschile: { turno1: { ...EMPTY_TURNO }, turno2: { ...EMPTY_TURNO } },
     Femminile: { turno1: { ...EMPTY_TURNO }, turno2: { ...EMPTY_TURNO } },
     Misto: { turno1: { ...EMPTY_TURNO }, turno2: { ...EMPTY_TURNO } },
+    Base: { turno1: { ...EMPTY_TURNO }, turno2: { ...EMPTY_TURNO } },
   };
 
   let db = EMPTY_DATA;
@@ -31,31 +29,17 @@
 
   function renderCategoria(categoria) {
     const dataset = db[categoria] || { turno1: EMPTY_TURNO, turno2: EMPTY_TURNO };
-    const labels = [formatItalianDate(dataset.turno1?.data) || 'Turno 1', formatItalianDate(dataset.turno2?.data) || null];
+    const turns = computeTurns(dataset);
+    const labels = turns.map(t => t.label);
     document.body.setAttribute('data-cat', categoria);
-    if (turno1Title) turno1Title.textContent = labels[0] || 'Turno 1';
-    if (turno2Title) turno2Title.textContent = labels[1] || 'Turno 2';
-    const turno1Section = document.getElementById('turno1');
-    const turno2Section = document.getElementById('turno2');
-    const isSingleTurn = !labels[1];
-    // Mostra i bottoni selezione turno (uno o due) ma nascondi i contenitori finché non si sceglie
-    if (turno1Section) turno1Section.style.display = 'none';
-    if (turno2Section) turno2Section.style.display = isSingleTurn ? 'none' : 'none';
+    const isSingleTurn = labels.length <= 1;
     if (turnSelector) {
-      turnSelector.style.display = '';
-      // reset stato bottoni
-      const btns = Array.from(turnSelector.querySelectorAll('.turn-btn'));
-      btns.forEach((b, idx) => {
-        if (idx === 1) b.style.display = isSingleTurn ? 'none' : '';
-        b.classList.remove('is-active');
-        b.setAttribute('aria-pressed', 'false');
-      });
-      currentTurn = null;
+      renderTurnButtons(turns);
+      const selected = currentTurn && currentTurn <= String(turns.length) ? currentTurn : '1';
+      setTurnButtonsState(selected);
+      renderTurnDetails(turns, selected);
+      currentTurn = selected;
     }
-    renderMeta(turno1Meta, dataset.turno1, categoria, labels[0]);
-    renderMeta(turno2Meta, dataset.turno2, categoria, labels[1]);
-    renderLista(turno1List, dataset.turno1?.nominativi);
-    renderLista(turno2List, dataset.turno2?.nominativi);
   }
 
   function renderLista(container, nominativi) {
@@ -277,6 +261,7 @@
         Maschile: normalize(json.Maschile),
         Femminile: normalize(json.Femminile),
         Misto: normalize(json.Misto),
+        Base: normalize(json.Base),
       };
     } catch (err) {
       console.warn('Impossibile caricare data.json, uso struttura vuota:', err);
@@ -317,17 +302,55 @@
     turnSelector.addEventListener('click', function (e) {
       const btn = e.target.closest('.turn-btn');
       if (!btn) return;
-      for (const el of turnSelector.querySelectorAll('.turn-btn')) {
-        el.classList.toggle('is-active', el === btn);
-        el.setAttribute('aria-pressed', el === btn ? 'true' : 'false');
-      }
       const selected = btn.getAttribute('data-turn');
+      setTurnButtonsState(selected);
+      const categoria = document.body.getAttribute('data-cat');
+      const dataset = db[categoria] || { turno1: EMPTY_TURNO, turno2: EMPTY_TURNO };
+      const turns = computeTurns(dataset);
+      renderTurnDetails(turns, selected);
       currentTurn = selected;
-      const s1 = document.getElementById('turno1');
-      const s2 = document.getElementById('turno2');
-      if (s1) s1.style.display = selected === '1' ? '' : 'none';
-      if (s2) s2.style.display = selected === '2' ? '' : 'none';
     });
+  }
+
+  function setTurnButtonsState(selected) {
+    const btns = turnSelector ? Array.from(turnSelector.querySelectorAll('.turn-btn')) : [];
+    for (const el of btns) {
+      const isActive = el.getAttribute('data-turn') === selected;
+      el.classList.toggle('is-active', isActive);
+      el.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    }
+  }
+
+  function renderTurnButtons(turns) {
+    if (!turnSelector) return;
+    turnSelector.innerHTML = '';
+    turns.forEach((t, idx) => {
+      const n = String(idx + 1);
+      const btn = document.createElement('button');
+      btn.className = 'turn-btn' + (idx === 0 ? ' is-active' : '');
+      btn.setAttribute('data-turn', n);
+      btn.setAttribute('aria-pressed', idx === 0 ? 'true' : 'false');
+      btn.textContent = t.label || `Turno ${n}`;
+      turnSelector.appendChild(btn);
+    });
+  }
+
+  function renderTurnDetails(turns, selected) {
+    const idx = parseInt(selected, 10) - 1;
+    const t = turns[idx];
+    if (!t) return;
+    if (turnTitle) turnTitle.textContent = t.label || `Turno ${selected}`;
+    renderMeta(turnMeta, t.data, t.categoria, t.label);
+    renderLista(turnList, t.data?.nominativi);
+  }
+
+  function computeTurns(dataset) {
+    const arr = [];
+    if (dataset.turno1) arr.push({ label: formatItalianDate(dataset.turno1.data) || 'Turno 1', data: dataset.turno1 });
+    if (dataset.turno2 && (dataset.turno2.data || dataset.turno2.orario || (dataset.turno2.nominativi && dataset.turno2.nominativi.length))) {
+      arr.push({ label: formatItalianDate(dataset.turno2.data) || 'Turno 2', data: dataset.turno2 });
+    }
+    return arr;
   }
 
   // search UI removed
