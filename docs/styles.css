@@ -41,9 +41,12 @@ body {
 }
 
 .segmented {
-  display: inline-grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: inline-flex;
   gap: 8px;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
 }
 
 /* search UI removed */
@@ -58,6 +61,7 @@ body {
   border-radius: 10px;
   font-size: 16px;
   font-weight: 600;
+  flex: 0 0 auto;
 }
 
 .segment.is-active {
