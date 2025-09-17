@@ -2,6 +2,8 @@
   const turno1List = document.getElementById('turno1-list');
   const turno2List = document.getElementById('turno2-list');
   const segmented = document.querySelector('.segmented');
+  const turnSelector = document.querySelector('.turn-selector');
+  let currentTurn = null; // nessun turno selezionato all'ingresso
   const turno1Title = document.getElementById('turno1-title');
   const turno2Title = document.getElementById('turno2-title');
   const turno1Meta = document.getElementById('turno1-meta');
@@ -39,7 +41,7 @@
       'Giovedi 25 settembre',
     ],
     Base: [
-      'Martedi 30 settembre',
+      'Turno 1',
       null,
     ],
   };
@@ -50,9 +52,22 @@
     document.body.setAttribute('data-cat', categoria);
     if (turno1Title) turno1Title.textContent = labels[0] || 'Turno 1';
     if (turno2Title) turno2Title.textContent = labels[1] || 'Turno 2';
+    const turno1Section = document.getElementById('turno1');
     const turno2Section = document.getElementById('turno2');
-    if (turno2Section) {
-      turno2Section.style.display = labels[1] ? '' : 'none';
+    const isSingleTurn = !labels[1];
+    // Mostra i bottoni selezione turno (uno o due) ma nascondi i contenitori finché non si sceglie
+    if (turno1Section) turno1Section.style.display = 'none';
+    if (turno2Section) turno2Section.style.display = isSingleTurn ? 'none' : 'none';
+    if (turnSelector) {
+      turnSelector.style.display = '';
+      // reset stato bottoni
+      const btns = Array.from(turnSelector.querySelectorAll('.turn-btn'));
+      btns.forEach((b, idx) => {
+        if (idx === 1) b.style.display = isSingleTurn ? 'none' : '';
+        b.classList.remove('is-active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      currentTurn = null;
     }
     renderMeta(turno1Meta, dataset.turno1, categoria, labels[0]);
     renderMeta(turno2Meta, dataset.turno2, categoria, labels[1]);
@@ -293,6 +308,23 @@
     const categoria = btn.getAttribute('data-cat');
     renderCategoria(categoria);
   });
+
+  if (turnSelector) {
+    turnSelector.addEventListener('click', function (e) {
+      const btn = e.target.closest('.turn-btn');
+      if (!btn) return;
+      for (const el of turnSelector.querySelectorAll('.turn-btn')) {
+        el.classList.toggle('is-active', el === btn);
+        el.setAttribute('aria-pressed', el === btn ? 'true' : 'false');
+      }
+      const selected = btn.getAttribute('data-turn');
+      currentTurn = selected;
+      const s1 = document.getElementById('turno1');
+      const s2 = document.getElementById('turno2');
+      if (s1) s1.style.display = selected === '1' ? '' : 'none';
+      if (s2) s2.style.display = selected === '2' ? '' : 'none';
+    });
+  }
 
   // search UI removed
 

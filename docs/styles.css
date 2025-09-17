@@ -41,12 +41,9 @@ body {
 }
 
 .segmented {
-  display: inline-flex;
+  display: inline-grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 8px;
-  overflow-x: auto;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 4px;
 }
 
 /* search UI removed */
@@ -62,6 +59,31 @@ body {
   font-size: 16px;
   font-weight: 600;
   flex: 0 0 auto;
+}
+
+.turn-selector {
+  margin: 8px auto 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.turn-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 10px 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.turn-btn.is-active {
+  outline: 2px solid var(--brand);
 }
 
 .segment.is-active {
