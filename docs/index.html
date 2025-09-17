@@ -8,7 +8,7 @@
   </head>
   <body>
     <header class="page-header">
-      <h1>Open Days CUSB · Cesena · Agonistico</h1>
+      <h1>Open Days CUSB · Cesena</h1>
       <nav class="segmented" aria-label="Seleziona categoria">
         <button class="segment is-active" data-cat="Maschile" aria-pressed="true">Maschile</button>
         <button class="segment" data-cat="Femminile" aria-pressed="false">Femminile</button>
@@ -18,6 +18,10 @@
     </header>
 
     <main class="turni-layout" id="turni-layout" aria-live="polite">
+      <div class="turn-selector" aria-label="Seleziona turno">
+        <button class="turn-btn is-active" data-turn="1" aria-pressed="true">Turno 1</button>
+        <button class="turn-btn" data-turn="2" aria-pressed="false">Turno 2</button>
+      </div>
       <section id="turno1" class="turno" aria-labelledby="turno1-title">
         <h2 id="turno1-title">Turno 1</h2>
         <div id="turno1-meta" class="turno-meta" aria-label="Dettagli turno 1"></div>
