@@ -460,9 +460,9 @@
       function updateAmount() {
         const cfg = costi[profilo] || {};
         if (rate === '1' && typeof cfg.una_rata === 'number') {
-          amount.textContent = `Importo: € ${euro(cfg.una_rata)}`;
+          amount.textContent = `€ ${euro(cfg.una_rata)}`;
         } else if (rate === '2' && Array.isArray(cfg.due_rate) && cfg.due_rate.length === 2) {
-          amount.textContent = `Importi: € ${euro(cfg.due_rate[0])} + € ${euro(cfg.due_rate[1])}`;
+          amount.textContent = `€ ${euro(cfg.due_rate[0])} + € ${euro(cfg.due_rate[1])}`;
         } else {
           amount.textContent = 'Importi in arrivo';
         }
