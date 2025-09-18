@@ -311,8 +311,9 @@ ul.nominativi li:nth-child(odd) {
 
 .days-pills {
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
 .pill {

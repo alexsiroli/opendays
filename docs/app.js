@@ -438,7 +438,7 @@
       let rate = '1';
       const lab1 = document.createElement('div'); lab1.className = 'cost-label'; lab1.textContent = 'Profilo';
       const group1 = document.createElement('div'); group1.className = 'choice-group';
-      const btnUnibo = document.createElement('button'); btnUnibo.type = 'button'; btnUnibo.className = 'choice-btn is-active'; btnUnibo.textContent = 'Studente UniBo';
+      const btnUnibo = document.createElement('button'); btnUnibo.type = 'button'; btnUnibo.className = 'choice-btn is-active'; btnUnibo.textContent = 'UniBo';
       const btnNon = document.createElement('button'); btnNon.type = 'button'; btnNon.className = 'choice-btn'; btnNon.textContent = 'Non UniBo';
       group1.appendChild(btnUnibo); group1.appendChild(btnNon);
       const wrap1 = document.createElement('div'); wrap1.appendChild(lab1); wrap1.appendChild(group1);
