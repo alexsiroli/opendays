@@ -5,6 +5,7 @@
   let currentTurn = null; // nessun turno selezionato all'ingresso
   const turnTitle = document.getElementById('turn-title');
   const turnMeta = document.getElementById('turn-meta');
+  const turnCount = document.getElementById('turn-count');
 
   /**
    * Struttura dati attesa in data.json:
@@ -14,12 +15,13 @@
    *   "Misto": { "turno1": [], "turno2": [] }
    * }
    */
-  const EMPTY_TURNO = { allenatore: '', palestra: '', orario: '', nominativi: [] };
+  const EMPTY_TURNO = { data: '', allenatore: '', palestra: '', orario: '', nominativi: [] };
+  const EMPTY_INFO_COSTI = { allenatore: '', giorni: [], costi: {} };
   const EMPTY_DATA = {
-    Maschile: { turno1: { ...EMPTY_TURNO }, turno2: { ...EMPTY_TURNO } },
-    Femminile: { turno1: { ...EMPTY_TURNO }, turno2: { ...EMPTY_TURNO } },
-    Misto: { turno1: { ...EMPTY_TURNO }, turno2: { ...EMPTY_TURNO } },
-    Base: { turno1: { ...EMPTY_TURNO }, turno2: { ...EMPTY_TURNO } },
+    Maschile: { turno1: { ...EMPTY_TURNO }, turno2: { ...EMPTY_TURNO }, infoCosti: { ...EMPTY_INFO_COSTI } },
+    Femminile: { turno1: { ...EMPTY_TURNO }, turno2: { ...EMPTY_TURNO }, infoCosti: { ...EMPTY_INFO_COSTI } },
+    Misto: { turno1: { ...EMPTY_TURNO }, turno2: { ...EMPTY_TURNO }, infoCosti: { ...EMPTY_INFO_COSTI } },
+    Base: { turno1: { ...EMPTY_TURNO }, turno2: { ...EMPTY_TURNO }, infoCosti: { ...EMPTY_INFO_COSTI } },
   };
 
   let db = EMPTY_DATA;
@@ -66,6 +68,7 @@
     if (!container) return;
     container.innerHTML = '';
     const rows = [
+      { label: 'Data', value: formatItalianDate(turno?.data) || '-' },
       { label: 'Allenatore', value: turno?.allenatore || '-' },
       { label: 'Palestra', value: turno?.palestra || '-' },
       { label: 'Orario', value: turno?.orario || '-' },
@@ -274,6 +277,7 @@
     return {
       turno1: normalizeTurno(safe.turno1),
       turno2: normalizeTurno(safe.turno2),
+      infoCosti: normalizeInfoCosti(safe.infoCosti),
     };
   }
 
@@ -285,6 +289,22 @@
       palestra: typeof t.palestra === 'string' ? t.palestra : '',
       orario: typeof t.orario === 'string' ? t.orario : '',
       nominativi: Array.isArray(t.nominativi) ? t.nominativi : [],
+    };
+  }
+
+  function normalizeInfoCosti(info) {
+    const i = info && typeof info === 'object' ? info : {};
+    const giorniRaw = Array.isArray(i.giorni) ? i.giorni : [];
+    const giorni = giorniRaw.map(g => ({
+      giorno: typeof g.giorno === 'string' ? g.giorno : '',
+      palestra: typeof g.palestra === 'string' ? g.palestra : '',
+      orario: typeof g.orario === 'string' ? g.orario : '',
+    }));
+    const costi = i.costi && typeof i.costi === 'object' ? i.costi : {};
+    return {
+      allenatore: typeof i.allenatore === 'string' ? i.allenatore : '',
+      giorni,
+      costi,
     };
   }
 
@@ -331,18 +351,34 @@
       btn.className = 'turn-btn' + (idx === 0 ? ' is-active' : '');
       btn.setAttribute('data-turn', n);
       btn.setAttribute('aria-pressed', idx === 0 ? 'true' : 'false');
-      btn.textContent = t.label || `Turno ${n}`;
+      btn.textContent = `Turno ${n}`;
       turnSelector.appendChild(btn);
     });
+    // Aggiungi tab unico Info e Costi (vuoto per ora)
+    const infocostiBtn = document.createElement('button');
+    infocostiBtn.className = 'turn-btn infocosti';
+    infocostiBtn.setAttribute('data-turn', 'infocosti');
+    infocostiBtn.setAttribute('aria-pressed', 'false');
+    infocostiBtn.textContent = 'Info e Costi';
+    turnSelector.appendChild(infocostiBtn);
   }
 
   function renderTurnDetails(turns, selected) {
+    if (selected === 'infocosti') {
+      if (turnTitle) turnTitle.textContent = 'Info e Costi';
+      const categoria = document.body.getAttribute('data-cat');
+      const dataset = db[categoria] || { turno1: {}, turno2: {}, infoCosti: {} };
+      renderInfoCosti(dataset);
+      return;
+    }
     const idx = parseInt(selected, 10) - 1;
     const t = turns[idx];
     if (!t) return;
-    if (turnTitle) turnTitle.textContent = t.label || `Turno ${selected}`;
+    if (turnTitle) turnTitle.textContent = `Turno ${selected}`;
     renderMeta(turnMeta, t.data, t.categoria, t.label);
-    renderLista(turnList, t.data?.nominativi);
+    const list = Array.isArray(t.data?.nominativi) ? t.data.nominativi : [];
+    renderLista(turnList, list);
+    if (turnCount) turnCount.textContent = `Totale giocatori: ${list.length}`;
   }
 
   function computeTurns(dataset) {
@@ -352,6 +388,93 @@
       arr.push({ label: formatItalianDate(dataset.turno2.data) || 'Turno 2', data: dataset.turno2 });
     }
     return arr;
+  }
+
+  function renderInfoCosti(datasetCategoria) {
+    // Meta: allenatore + giorni
+    const info = datasetCategoria.infoCosti || {};
+    const allenatore = info.allenatore || '';
+    const giorni = Array.isArray(info.giorni) ? info.giorni : [];
+
+    // Costruisci blocco meta per Info e Costi
+    if (turnMeta) {
+      turnMeta.innerHTML = '';
+      const rows = [];
+      rows.push({ label: 'Allenatore', value: allenatore || '-' });
+      if (giorni.length > 0) {
+        const pills = document.createElement('div'); pills.className = 'days-pills';
+        for (const g of giorni) {
+          const giorno = g.giorno || '';
+          const pal = g.palestra || '';
+          const orario = g.orario || '';
+          const { text: palText, url: palUrl } = parsePalestra(pal);
+          const pill = document.createElement('div'); pill.className = 'pill';
+          const daySpan = document.createElement('span'); daySpan.textContent = giorno;
+          pill.appendChild(daySpan);
+          if (palUrl) {
+            const a = document.createElement('a'); a.href = palUrl; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = palText || 'Palestra';
+            pill.appendChild(a);
+          } else {
+            const s = document.createElement('span'); s.textContent = palText || pal; pill.appendChild(s);
+          }
+          const time = document.createElement('span'); time.className = 'time'; time.textContent = orario || '';
+          pill.appendChild(time);
+          pills.appendChild(pill);
+        }
+        turnMeta.appendChild(pills);
+      }
+      // Righe base già renderizzate sopra? Per Info e Costi non servono turno-specifiche
+    }
+
+    // Lista: pannello costi con controlli
+    if (turnList) {
+      turnList.innerHTML = '';
+      const li = document.createElement('li');
+      li.className = 'cost-panel';
+      const controls = document.createElement('div'); controls.className = 'cost-controls';
+
+      // Scelte custom (senza select)
+      let profilo = 'unibo';
+      let rate = '1';
+      const lab1 = document.createElement('div'); lab1.className = 'cost-label'; lab1.textContent = 'Profilo';
+      const group1 = document.createElement('div'); group1.className = 'choice-group';
+      const btnUnibo = document.createElement('button'); btnUnibo.type = 'button'; btnUnibo.className = 'choice-btn is-active'; btnUnibo.textContent = 'Studente UniBo';
+      const btnNon = document.createElement('button'); btnNon.type = 'button'; btnNon.className = 'choice-btn'; btnNon.textContent = 'Non UniBo';
+      group1.appendChild(btnUnibo); group1.appendChild(btnNon);
+      const wrap1 = document.createElement('div'); wrap1.appendChild(lab1); wrap1.appendChild(group1);
+
+      const lab2 = document.createElement('div'); lab2.className = 'cost-label'; lab2.textContent = 'Rate';
+      const group2 = document.createElement('div'); group2.className = 'choice-group';
+      const btn1 = document.createElement('button'); btn1.type = 'button'; btn1.className = 'choice-btn is-active'; btn1.textContent = 'Una rata';
+      const btn2 = document.createElement('button'); btn2.type = 'button'; btn2.className = 'choice-btn'; btn2.textContent = 'Due rate';
+      group2.appendChild(btn1); group2.appendChild(btn2);
+      const wrap2 = document.createElement('div'); wrap2.appendChild(lab2); wrap2.appendChild(group2);
+      const amount = document.createElement('div'); amount.className = 'cost-amount'; amount.textContent = '';
+
+      controls.appendChild(wrap1); controls.appendChild(wrap2);
+      li.appendChild(controls); li.appendChild(amount);
+      turnList.appendChild(li);
+
+      const costi = info.costi || {};
+      function euro(n) { try { return Number(n).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); } catch { return String(n); } }
+      function updateAmount() {
+        const cfg = costi[profilo] || {};
+        if (rate === '1' && typeof cfg.una_rata === 'number') {
+          amount.textContent = `Importo: € ${euro(cfg.una_rata)}`;
+        } else if (rate === '2' && Array.isArray(cfg.due_rate) && cfg.due_rate.length === 2) {
+          amount.textContent = `Importi: € ${euro(cfg.due_rate[0])} + € ${euro(cfg.due_rate[1])}`;
+        } else {
+          amount.textContent = 'Importi in arrivo';
+        }
+      }
+      btnUnibo.addEventListener('click', function () { profilo = 'unibo'; btnUnibo.classList.add('is-active'); btnNon.classList.remove('is-active'); updateAmount(); });
+      btnNon.addEventListener('click', function () { profilo = 'non_unibo'; btnNon.classList.add('is-active'); btnUnibo.classList.remove('is-active'); updateAmount(); });
+      btn1.addEventListener('click', function () { rate = '1'; btn1.classList.add('is-active'); btn2.classList.remove('is-active'); updateAmount(); });
+      btn2.addEventListener('click', function () { rate = '2'; btn2.classList.add('is-active'); btn1.classList.remove('is-active'); updateAmount(); });
+      updateAmount();
+    }
+
+    if (turnCount) turnCount.textContent = '';
   }
 
   // search UI removed

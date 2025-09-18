@@ -1,5 +1,16 @@
 {
   "Maschile": {
+    "infoCosti": {
+      "allenatore": "Nicola Faenza",
+      "giorni": [
+        { "giorno": "Mercoledi", "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)", "orario": "21:30" },
+        { "giorno": "Venerdi", "palestra": "Plauto (https://maps.app.goo.gl/UhLcCCnk4CNCHAF46?g_st=ipc)", "orario": "21:00" }
+      ],
+      "costi": {
+        "unibo": { "una_rata": 280, "due_rate": [190, 145] },
+        "non_unibo": { "una_rata": 350, "due_rate": [235, 180] }
+      }
+    },
     "turno1": {
       "data": "2025-09-24",
       "allenatore": "Nicola Faenza",
@@ -52,6 +63,17 @@
     }
   },
   "Femminile": {
+    "infoCosti": {
+      "allenatore": "Tobia Di Meo",
+      "giorni": [
+        { "giorno": "Lunedi", "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)", "orario": "21:00" },
+        { "giorno": "Mercoledi", "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)", "orario": "21:00" }
+      ],
+      "costi": {
+        "unibo": { "una_rata": 280, "due_rate": [190, 145] },
+        "non_unibo": { "una_rata": 350, "due_rate": [235, 180] }
+      }
+    },
     "turno1": {
       "data": "2025-09-22",
       "allenatore": "Tobia Di Meo",
@@ -104,6 +126,17 @@
     }
   },
   "Misto": {
+    "infoCosti": {
+      "allenatore": "Oscar Vitali",
+      "giorni": [
+        { "giorno": "Martedi", "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)", "orario": "21:00" },
+        { "giorno": "Giovedi", "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)", "orario": "21:30" }
+      ],
+      "costi": {
+        "unibo": { "una_rata": 280, "due_rate": [190, 145] },
+        "non_unibo": { "una_rata": 350, "due_rate": [235, 180] }
+      }
+    },
     "turno1": {
       "data": "2025-09-23",
       "allenatore": "Oscar Vitali",
@@ -182,6 +215,14 @@
         "Pracucci Davide",
         "Pallari Marta"
       ]
+    },
+    "infoCosti": {
+      "allenatore": "Samuele Sirri",
+      "giorni": [
+        { "giorno": "Martedi", "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)", "orario": "21:00" },
+        { "giorno": "Giovedi", "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)", "orario": "21:00" }
+      ],
+      "costi": { "note": "Informazioni in arrivo" }
     }
   }
 }

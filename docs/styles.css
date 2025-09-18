@@ -86,6 +86,9 @@ body {
   outline: 2px solid var(--brand);
 }
 
+/* Varianti colore per tab aggiuntivi */
+.turn-btn.infocosti { background: #fff7ed; border-color: #fed7aa; }
+
 .segment.is-active {
   outline: 2px solid var(--brand);
   outline-offset: 0;
@@ -225,6 +228,109 @@ ul.nominativi li {
 
 ul.nominativi li:nth-child(odd) {
   background: var(--row-odd);
+}
+.turn-count {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: right;
+}
+
+/* Info e Costi */
+.days-list {
+  margin: 0;
+  padding-left: 16px;
+}
+
+.days-list li {
+  margin: 2px 0;
+}
+
+.cost-panel {
+  list-style: none;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 14px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.cost-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.cost-input {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+  padding: 10px 12px;
+}
+
+.cost-amount {
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.cost-label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.choice-group {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.choice-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.choice-btn.is-active {
+  outline: 2px solid var(--brand);
+}
+
+.meta-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text);
+  margin: 6px 0 4px;
+}
+
+.days-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #ffffff;
+}
+
+.pill .time {
+  background: #eef2ff;
+  color: #1f2937;
+  padding: 2px 6px;
+  border-radius: 999px;
+  font-size: 12px;
 }
 
 ul.nominativi li:first-child {
