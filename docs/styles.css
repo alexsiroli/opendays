@@ -286,6 +286,11 @@ ul.nominativi li:nth-child(odd) {
   align-items: center;
   gap: 12px;
   margin-bottom: 12px;
+  width: 100%;
+}
+
+.cost-controls > div { /* wrapper di Profilo e Rate */
+  width: 100%;
 }
 
 .cost-input {
@@ -311,6 +316,7 @@ ul.nominativi li:nth-child(odd) {
 
 .choice-group {
   display: flex;
+  flex-direction: row;
   gap: 10px;
   width: 100%;
 }
