@@ -483,6 +483,9 @@
     await loadData();
     const active = segmented.querySelector('.segment.is-active');
     renderCategoria(active ? active.getAttribute('data-cat') : 'Maschile');
+    if ('serviceWorker' in navigator) {
+      try { await navigator.serviceWorker.register('./sw.js'); } catch {}
+    }
   })();
 })();
 
