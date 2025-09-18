@@ -157,7 +157,7 @@
     const location = locText || 'Da definire';
     const start = buildDateFromIsoAndTime(turno?.data, turno?.orario || '21:00');
     const end = new Date(start.getTime() + 90 * 60 * 1000);
-    const description = `Allenatore: ${turno?.allenatore || '-'}\nCategoria: ${categoria}`;
+    const description = `Allenatore: ${turno?.allenatore || '-'}`;
     return { start, end, location, title, description, url: locUrl || '', displayLocation: locText || '' };
   }
 
