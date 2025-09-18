@@ -368,7 +368,7 @@
       if (turnTitle) turnTitle.textContent = 'Info e Costi';
       const categoria = document.body.getAttribute('data-cat');
       const dataset = db[categoria] || { turno1: {}, turno2: {}, infoCosti: {} };
-      renderInfoCosti(dataset);
+      renderInfoCosti(dataset, categoria);
       return;
     }
     const idx = parseInt(selected, 10) - 1;
@@ -390,7 +390,7 @@
     return arr;
   }
 
-  function renderInfoCosti(datasetCategoria) {
+  function renderInfoCosti(datasetCategoria, categoria) {
     // Meta: allenatore + giorni
     const info = datasetCategoria.infoCosti || {};
     const allenatore = info.allenatore || '';

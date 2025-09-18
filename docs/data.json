@@ -232,8 +232,8 @@
         { "giorno": "Giovedi", "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)", "orario": "21:00" }
       ],
       "costi": {
-        "unibo": { "monosettimanale": 0, "bisettimanale": 0 },
-        "non_unibo": { "monosettimanale": 0, "bisettimanale": 0 }
+        "unibo": { "monosettimanale": 185, "bisettimanale": 250 },
+        "non_unibo": { "monosettimanale": 230, "bisettimanale": 320 }
       }
     }
   }
