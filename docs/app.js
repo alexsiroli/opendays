@@ -435,7 +435,7 @@
 
       // Scelte custom (senza select)
       let profilo = 'unibo';
-      let rate = '1';
+      let rate = categoria === 'Base' ? 'monosettimanale' : '1';
       const lab1 = document.createElement('div'); lab1.className = 'cost-label'; lab1.textContent = 'Profilo';
       const group1 = document.createElement('div'); group1.className = 'choice-group';
       const btnUnibo = document.createElement('button'); btnUnibo.type = 'button'; btnUnibo.className = 'choice-btn is-active'; btnUnibo.textContent = 'UniBo';
@@ -443,10 +443,10 @@
       group1.appendChild(btnUnibo); group1.appendChild(btnNon);
       const wrap1 = document.createElement('div'); wrap1.appendChild(lab1); wrap1.appendChild(group1);
 
-      const lab2 = document.createElement('div'); lab2.className = 'cost-label'; lab2.textContent = 'Rate';
+      const lab2 = document.createElement('div'); lab2.className = 'cost-label'; lab2.textContent = categoria === 'Base' ? 'Frequenza' : 'Rate';
       const group2 = document.createElement('div'); group2.className = 'choice-group';
-      const btn1 = document.createElement('button'); btn1.type = 'button'; btn1.className = 'choice-btn is-active'; btn1.textContent = 'Una rata';
-      const btn2 = document.createElement('button'); btn2.type = 'button'; btn2.className = 'choice-btn'; btn2.textContent = 'Due rate';
+      const btn1 = document.createElement('button'); btn1.type = 'button'; btn1.className = 'choice-btn is-active'; btn1.textContent = categoria === 'Base' ? 'Monosettimanale' : 'Una rata';
+      const btn2 = document.createElement('button'); btn2.type = 'button'; btn2.className = 'choice-btn'; btn2.textContent = categoria === 'Base' ? 'Bisettimanale' : 'Due rate';
       group2.appendChild(btn1); group2.appendChild(btn2);
       const wrap2 = document.createElement('div'); wrap2.appendChild(lab2); wrap2.appendChild(group2);
       const amount = document.createElement('div'); amount.className = 'cost-amount'; amount.textContent = '';
@@ -459,18 +459,28 @@
       function euro(n) { try { return Number(n).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); } catch { return String(n); } }
       function updateAmount() {
         const cfg = costi[profilo] || {};
-        if (rate === '1' && typeof cfg.una_rata === 'number') {
-          amount.textContent = `€ ${euro(cfg.una_rata)}`;
-        } else if (rate === '2' && Array.isArray(cfg.due_rate) && cfg.due_rate.length === 2) {
-          amount.textContent = `€ ${euro(cfg.due_rate[0])} + € ${euro(cfg.due_rate[1])}`;
+        if (categoria === 'Base') {
+          if (rate === 'monosettimanale' && typeof cfg.monosettimanale === 'number') {
+            amount.textContent = `€ ${euro(cfg.monosettimanale)}`;
+          } else if (rate === 'bisettimanale' && typeof cfg.bisettimanale === 'number') {
+            amount.textContent = `€ ${euro(cfg.bisettimanale)}`;
+          } else {
+            amount.textContent = 'Importi in arrivo';
+          }
         } else {
-          amount.textContent = 'Importi in arrivo';
+          if (rate === '1' && typeof cfg.una_rata === 'number') {
+            amount.textContent = `€ ${euro(cfg.una_rata)}`;
+          } else if (rate === '2' && Array.isArray(cfg.due_rate) && cfg.due_rate.length === 2) {
+            amount.textContent = `€ ${euro(cfg.due_rate[0])} + € ${euro(cfg.due_rate[1])}`;
+          } else {
+            amount.textContent = 'Importi in arrivo';
+          }
         }
       }
       btnUnibo.addEventListener('click', function () { profilo = 'unibo'; btnUnibo.classList.add('is-active'); btnNon.classList.remove('is-active'); updateAmount(); });
       btnNon.addEventListener('click', function () { profilo = 'non_unibo'; btnNon.classList.add('is-active'); btnUnibo.classList.remove('is-active'); updateAmount(); });
-      btn1.addEventListener('click', function () { rate = '1'; btn1.classList.add('is-active'); btn2.classList.remove('is-active'); updateAmount(); });
-      btn2.addEventListener('click', function () { rate = '2'; btn2.classList.add('is-active'); btn1.classList.remove('is-active'); updateAmount(); });
+      btn1.addEventListener('click', function () { rate = categoria === 'Base' ? 'monosettimanale' : '1'; btn1.classList.add('is-active'); btn2.classList.remove('is-active'); updateAmount(); });
+      btn2.addEventListener('click', function () { rate = categoria === 'Base' ? 'bisettimanale' : '2'; btn2.classList.add('is-active'); btn1.classList.remove('is-active'); updateAmount(); });
       updateAmount();
     }
 

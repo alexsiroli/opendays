@@ -231,7 +231,10 @@
         { "giorno": "Martedi", "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)", "orario": "21:00" },
         { "giorno": "Giovedi", "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)", "orario": "21:00" }
       ],
-      "costi": { "note": "Informazioni in arrivo" }
+      "costi": {
+        "unibo": { "monosettimanale": 0, "bisettimanale": 0 },
+        "non_unibo": { "monosettimanale": 0, "bisettimanale": 0 }
+      }
     }
   }
 }
