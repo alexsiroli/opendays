@@ -31,7 +31,13 @@
         "Bonomi Riccardo",
         "Campana Mattia",
         "Nieri Nico",
-        "Milella Gabriele"
+        "Campagna Nicholas",
+        "Borghini Davide",
+        "Raffaeli Simone",
+        "Milella Gabriele",
+        "Martini Alessandro",
+        "Savadori Luca",
+        "Mondardini Marco"
       ]
     },
     "turno2": {
@@ -43,15 +49,12 @@
         "Colinucci Nicolas",
         "Zignani Filippo",
         "Sodero Giulio",
-        "Campagna Nicholas",
         "Siroli Alex",
         "Baldoni Manuel",
         "Mariani Federico",
-        "Raffaeli Simone",
         "Barbieri Della Chiesa Enrico",        
         "Avenali Paolo",
         "Aguzzoni Giuseppe",
-        "Borghini Davide",
         "Foschi Giovanni",
         "Bagnale Martino"
       ]
@@ -144,7 +147,6 @@
       "nominativi": [
         "Martini Alessandro",
         "Mondardini Marco",
-        "Raffaeli Simone",
         "Mongiusti Luca",
         "Aguzzoni Giuseppe",
         "Bonomi RIccardo",
@@ -171,6 +173,7 @@
       "orario": "21:30",
       "nominativi": [
         "Baldoni Manuel",
+        "Raffaeli Simone",
         "Barchi Riccardo",
         "Mariani Federico",
         "Werpers Lasse",
