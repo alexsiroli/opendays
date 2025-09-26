@@ -1,3 +1,4 @@
+<script>
 (function () {
   const turnList = document.getElementById('turn-list');
   const segmented = document.querySelector('.segmented');
@@ -8,33 +9,42 @@
   const turnCount = document.getElementById('turn-count');
 
   /**
-   * Struttura dati attesa in data.json:
+   * ✅ Nuovo formato atteso in data.json (supporta N turni):
    * {
-   *   "Maschile": { "turno1": ["Nome Cognome"], "turno2": ["..."] },
-   *   "Femminile": { "turno1": [], "turno2": [] },
-   *   "Misto": { "turno1": [], "turno2": [] }
+   *   "Maschile": {
+   *     "turni": [
+   *       { "data": "2025-09-24", "allenatore": "", "palestra": "", "orario": "", "nominativi": [] },
+   *       { "data": "2025-09-30", "allenatore": "", "palestra": "", "orario": "", "nominativi": [] }
+   *     ],
+   *     "infoCosti": { "allenatore": "", "giorni": [ ... ], "costi": { ... } }
+   *   },
+   *   "Femminile": { "turni": [ ... ], "infoCosti": { ... } },
+   *   "Misto": { "turni": [ ... ], "infoCosti": { ... } },
+   *   "Base": { "turni": [ ... ], "infoCosti": { ... } }
    * }
+   *
+   * 🔁 Retro-compatibile: se trova "turno1"/"turno2", li converte automaticamente in "turni".
    */
+
   const EMPTY_TURNO = { data: '', allenatore: '', palestra: '', orario: '', nominativi: [] };
   const EMPTY_INFO_COSTI = { allenatore: '', giorni: [], costi: {} };
+  const EMPTY_CATEGORY = { turni: [], infoCosti: { ...EMPTY_INFO_COSTI } };
   const EMPTY_DATA = {
-    Maschile: { turno1: { ...EMPTY_TURNO }, turno2: { ...EMPTY_TURNO }, infoCosti: { ...EMPTY_INFO_COSTI } },
-    Femminile: { turno1: { ...EMPTY_TURNO }, turno2: { ...EMPTY_TURNO }, infoCosti: { ...EMPTY_INFO_COSTI } },
-    Misto: { turno1: { ...EMPTY_TURNO }, turno2: { ...EMPTY_TURNO }, infoCosti: { ...EMPTY_INFO_COSTI } },
-    Base: { turno1: { ...EMPTY_TURNO }, turno2: { ...EMPTY_TURNO }, infoCosti: { ...EMPTY_INFO_COSTI } },
+    Maschile: { ...EMPTY_CATEGORY },
+    Femminile: { ...EMPTY_CATEGORY },
+    Misto: { ...EMPTY_CATEGORY },
+    Base: { ...EMPTY_CATEGORY },
   };
 
   let db = EMPTY_DATA;
   let currentQuery = '';
 
-  // Le etichette dei turni vengono ora lette da data.json (campo ISO "data")
+  // Le etichette dei turni vengono lette da data.json ("data" + eventuale "orario" in caso di più turni nello stesso giorno)
 
   function renderCategoria(categoria) {
-    const dataset = db[categoria] || { turno1: EMPTY_TURNO, turno2: EMPTY_TURNO };
+    const dataset = db[categoria] || { ...EMPTY_CATEGORY };
     const turns = computeTurns(dataset);
-    const labels = turns.map(t => t.label);
     document.body.setAttribute('data-cat', categoria);
-    const isSingleTurn = labels.length <= 1;
     if (turnSelector) {
       renderTurnButtons(turns);
       const selected = currentTurn && currentTurn <= String(turns.length) ? currentTurn : '1';
@@ -101,10 +111,10 @@
       container.appendChild(div);
     }
 
-    // Calendar section label
     // Actions: calendar buttons
     const actions = document.createElement('div');
     actions.className = 'turno-actions';
+
     const addIcsBtn = document.createElement('button');
     addIcsBtn.type = 'button';
     addIcsBtn.className = 'btn';
@@ -168,7 +178,6 @@
       luglio: 6, agosto: 7, settembre: 8, ottobre: 9, novembre: 10, dicembre: 11,
     };
     const parts = labelWithYear.toLowerCase().split(/\s+/);
-    // trova giorno numero e mese
     let day = 1, month = 0, year = new Date().getFullYear();
     for (let i = 0; i < parts.length; i++) {
       const p = parts[i];
@@ -259,7 +268,7 @@
       const res = await fetch('data.json', { cache: 'no-store' });
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const json = await res.json();
-      // Validazione leggera
+      // Validazione + normalizzazione (supporta sia nuovo schema "turni" sia legacy "turno1/turno2")
       db = {
         Maschile: normalize(json.Maschile),
         Femminile: normalize(json.Femminile),
@@ -274,11 +283,19 @@
 
   function normalize(section) {
     const safe = section && typeof section === 'object' ? section : {};
-    return {
-      turno1: normalizeTurno(safe.turno1),
-      turno2: normalizeTurno(safe.turno2),
-      infoCosti: normalizeInfoCosti(safe.infoCosti),
-    };
+    const infoCosti = normalizeInfoCosti(safe.infoCosti);
+    // Nuovo schema
+    if (Array.isArray(safe.turni)) {
+      return {
+        turni: safe.turni.map(normalizeTurno).filter(t => !!(t.data || t.orario || (t.nominativi && t.nominativi.length))),
+        infoCosti,
+      };
+    }
+    // Legacy schema -> converte in "turni"
+    const t1 = normalizeTurno(safe.turno1);
+    const t2 = normalizeTurno(safe.turno2);
+    const turni = [t1, t2].filter(t => !!(t.data || t.orario || (t.nominativi && t.nominativi.length)));
+    return { turni, infoCosti };
   }
 
   function normalizeTurno(turno) {
@@ -326,7 +343,7 @@
       const selected = btn.getAttribute('data-turn');
       setTurnButtonsState(selected);
       const categoria = document.body.getAttribute('data-cat');
-      const dataset = db[categoria] || { turno1: EMPTY_TURNO, turno2: EMPTY_TURNO };
+      const dataset = db[categoria] || { ...EMPTY_CATEGORY };
       const turns = computeTurns(dataset);
       renderTurnDetails(turns, selected);
       currentTurn = selected;
@@ -351,10 +368,10 @@
       btn.className = 'turn-btn' + (idx === 0 ? ' is-active' : '');
       btn.setAttribute('data-turn', n);
       btn.setAttribute('aria-pressed', idx === 0 ? 'true' : 'false');
-      btn.textContent = `Turno ${n}`;
+      btn.textContent = t.label || `Turno ${n}`;
       turnSelector.appendChild(btn);
     });
-    // Aggiungi tab unico Info e Costi (vuoto per ora)
+    // Aggiungi tab unico Info e Costi
     const infocostiBtn = document.createElement('button');
     infocostiBtn.className = 'turn-btn infocosti';
     infocostiBtn.setAttribute('data-turn', 'infocosti');
@@ -367,14 +384,14 @@
     if (selected === 'infocosti') {
       if (turnTitle) turnTitle.textContent = 'Info e Costi';
       const categoria = document.body.getAttribute('data-cat');
-      const dataset = db[categoria] || { turno1: {}, turno2: {}, infoCosti: {} };
+      const dataset = db[categoria] || { ...EMPTY_CATEGORY };
       renderInfoCosti(dataset, categoria);
       return;
     }
     const idx = parseInt(selected, 10) - 1;
     const t = turns[idx];
     if (!t) return;
-    if (turnTitle) turnTitle.textContent = `Turno ${selected}`;
+    if (turnTitle) turnTitle.textContent = t.label || `Turno ${selected}`;
     renderMeta(turnMeta, t.data, t.categoria, t.label);
     const list = Array.isArray(t.data?.nominativi) ? t.data.nominativi : [];
     renderLista(turnList, list);
@@ -382,11 +399,33 @@
   }
 
   function computeTurns(dataset) {
-    const arr = [];
-    if (dataset.turno1) arr.push({ label: formatItalianDate(dataset.turno1.data) || 'Turno 1', data: dataset.turno1 });
-    if (dataset.turno2 && (dataset.turno2.data || dataset.turno2.orario || (dataset.turno2.nominativi && dataset.turno2.nominativi.length))) {
-      arr.push({ label: formatItalianDate(dataset.turno2.data) || 'Turno 2', data: dataset.turno2 });
-    }
+    const turni = Array.isArray(dataset.turni) ? dataset.turni.slice() : [];
+
+    // Ordina per data (e orario se presente)
+    turni.sort((a, b) => {
+      const da = a?.data || '';
+      const dbb = b?.data || '';
+      if (da !== dbb) return da.localeCompare(dbb);
+      const ta = (a?.orario || '').padStart(5, '0');
+      const tb = (b?.orario || '').padStart(5, '0');
+      return ta.localeCompare(tb);
+    });
+
+    // Conta quanti turni ci sono nello stesso giorno
+    const sameDayCounts = turni.reduce((acc, t) => {
+      const k = t?.data || '';
+      acc[k] = (acc[k] || 0) + 1;
+      return acc;
+    }, {});
+
+    // Crea etichette: se più turni nello stesso giorno, aggiunge l'orario
+    const arr = turni.map((t) => {
+      const base = formatItalianDate(t?.data) || 'Turno';
+      const needsTime = (sameDayCounts[t?.data || ''] || 0) > 1;
+      const label = needsTime && t?.orario ? `${base} • ${t.orario}` : base;
+      return { label, data: t };
+    });
+
     return arr;
   }
 
@@ -396,7 +435,7 @@
     const allenatore = info.allenatore || '';
     const giorni = Array.isArray(info.giorni) ? info.giorni : [];
 
-    // Costruisci blocco meta per Info e Costi
+    // Blocco meta
     if (turnMeta) {
       turnMeta.innerHTML = '';
       const rows = [];
@@ -423,7 +462,6 @@
         }
         turnMeta.appendChild(pills);
       }
-      // Righe base già renderizzate sopra? Per Info e Costi non servono turno-specifiche
     }
 
     // Lista: pannello costi con controlli
@@ -487,8 +525,7 @@
     if (turnCount) turnCount.textContent = '';
   }
 
-  // search UI removed
-
+  // init
   (async function init() {
     await loadData();
     const active = segmented.querySelector('.segment.is-active');
@@ -498,5 +535,4 @@
     }
   })();
 })();
-
-
+</script>
