@@ -11,53 +11,55 @@
         "non_unibo": { "una_rata": 350, "due_rate": [235, 180] }
       }
     },
-    "turno1": {
-      "data": "2025-09-24",
-      "allenatore": "Nicola Faenza",
-      "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)",
-      "orario": "21:00",
-      "nominativi": [
-        "Colinucci Nicolas",
-        "Canali Mattia",
-        "Savadori Luca",
-        "Siroli Alex",
-        "Barchi Riccardo",
-        "Martini Alessandro",
-        "Mondardini Marco",
-        "Serrani Francesco",
-        "Barbieri Della Chiesa Enrico",
-        "Mongiusti Luca",
-        "Ventrucci Luca",
-        "Bonomi Riccardo",
-        "Campana Mattia",
-        "Nieri Nico",
-        "Campagna Nicholas",
-        "Borghini Davide",
-        "Raffaeli Simone",
-        "Milella Gabriele",
-        "Zignani Filippo"
-      ]
-    },
-    "turno2": {
-      "data": "2025-09-26",
-      "allenatore": "Nicola Faenza",
-      "palestra": "Plauto (https://maps.app.goo.gl/UhLcCCnk4CNCHAF46?g_st=ipc)",
-      "orario": "21:00",
-      "nominativi": [
-        "Colinucci Nicolas",
-        "Sodero Giulio",
-        "Siroli Alex",
-        "Martini Alessandro",
-        "Baldoni Manuel",
-        "Mondardini Marco",
-        "Mariani Federico",
-        "Barbieri Della Chiesa Enrico",        
-        "Avenali Paolo",
-        "Aguzzoni Giuseppe",
-        "Foschi Giovanni",
-        "Bagnale Martino"
-      ]
-    }
+    "turni": [
+      {
+        "data": "2025-09-24",
+        "allenatore": "Nicola Faenza",
+        "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)",
+        "orario": "21:00",
+        "nominativi": [
+          "Colinucci Nicolas",
+          "Canali Mattia",
+          "Savadori Luca",
+          "Siroli Alex",
+          "Barchi Riccardo",
+          "Martini Alessandro",
+          "Mondardini Marco",
+          "Serrani Francesco",
+          "Barbieri Della Chiesa Enrico",
+          "Mongiusti Luca",
+          "Ventrucci Luca",
+          "Bonomi Riccardo",
+          "Campana Mattia",
+          "Nieri Nico",
+          "Campagna Nicholas",
+          "Borghini Davide",
+          "Raffaeli Simone",
+          "Milella Gabriele",
+          "Zignani Filippo"
+        ]
+      },
+      {
+        "data": "2025-09-26",
+        "allenatore": "Nicola Faenza",
+        "palestra": "Plauto (https://maps.app.goo.gl/UhLcCCnk4CNCHAF46?g_st=ipc)",
+        "orario": "21:00",
+        "nominativi": [
+          "Colinucci Nicolas",
+          "Sodero Giulio",
+          "Siroli Alex",
+          "Martini Alessandro",
+          "Baldoni Manuel",
+          "Mondardini Marco",
+          "Mariani Federico",
+          "Barbieri Della Chiesa Enrico",
+          "Avenali Paolo",
+          "Aguzzoni Giuseppe",
+          "Foschi Giovanni",
+          "Bagnale Martino"
+        ]
+      }
+    ]
   },
   "Femminile": {
     "infoCosti": {
@@ -71,87 +73,69 @@
         "non_unibo": { "una_rata": 350, "due_rate": [235, 180] }
       }
     },
-    "turno1": {
-      "data": "2025-09-22",
-      "allenatore": "Tobia Di Meo",
-      "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)",
-      "orario": "21:00",
-      "nominativi": [
-        "Balzoni Margherita",
-        "Levanetesi Elisa",
-        "Mastrilli Alice",
-        "Mori Letizia",
-        "Panariello Celine",
-        "Paradisi Sara",
-        "Rivara Greta",
-        "Savadori Erica",
-        "Zagnoli Sabrina",
-        "Tagliatesta Sofia",
-        "Severi Alessia",
-        "Amoruso Maria Luce",
-        "Passerini Cecilia",
-        "Calisi Domiziana",
-        "Pignotti Roberta",
-        "Giuliani Elisa",
-        "Boccia Marianna",
-        "Pedrelli Letizia",
-        "Moro Martina"
-      ]
-    },
-    "turno2": {
-      "data": "2025-09-24",
-      "allenatore": "Tobia Di Meo",
-      "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)",
-      "orario": "21:00",
-      "nominativi": [
-        "Arienti Alicia",
-        "Maltoni Martina",
-        "Valdiserri Sara",
-        "Valentini Laura",
-        "Molari Giorgia",
-        "Beccati Alice",
-        "Buccolini Lucia",
-        "Fattori Giorgia",
-        "Mordenti Alice",
-        "Pisano Maya",
-        "Sanchez Barbara",
-        "Sbrighi Margherita",
-        "Sirri Sofia",
-        "Visani Vittoria",
-        "Zanotti Chiara",
-        "Grazia Carlotta",
-        "Fabbri Benedetta",
-        "Sacchetti Valentina",
-        "Corsini Alessandra"
-      ]
-    },
-    "turno3": {
-      "data": "2025-09-29",
-      "allenatore": "Tobia Di Meo",
-      "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)",
-      "orario": "21:00",
-      "nominativi": [
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ]
-    }
+    "turni": [
+      {
+        "data": "2025-09-22",
+        "allenatore": "Tobia Di Meo",
+        "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)",
+        "orario": "21:00",
+        "nominativi": [
+          "Balzoni Margherita",
+          "Levanetesi Elisa",
+          "Mastrilli Alice",
+          "Mori Letizia",
+          "Panariello Celine",
+          "Paradisi Sara",
+          "Rivara Greta",
+          "Savadori Erica",
+          "Zagnoli Sabrina",
+          "Tagliatesta Sofia",
+          "Severi Alessia",
+          "Amoruso Maria Luce",
+          "Passerini Cecilia",
+          "Calisi Domiziana",
+          "Pignotti Roberta",
+          "Giuliani Elisa",
+          "Boccia Marianna",
+          "Pedrelli Letizia",
+          "Moro Martina"
+        ]
+      },
+      {
+        "data": "2025-09-24",
+        "allenatore": "Tobia Di Meo",
+        "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)",
+        "orario": "21:00",
+        "nominativi": [
+          "Arienti Alicia",
+          "Maltoni Martina",
+          "Valdiserri Sara",
+          "Valentini Laura",
+          "Molari Giorgia",
+          "Beccati Alice",
+          "Buccolini Lucia",
+          "Fattori Giorgia",
+          "Mordenti Alice",
+          "Pisano Maya",
+          "Sanchez Barbara",
+          "Sbrighi Margherita",
+          "Sirri Sofia",
+          "Visani Vittoria",
+          "Zanotti Chiara",
+          "Grazia Carlotta",
+          "Fabbri Benedetta",
+          "Sacchetti Valentina",
+          "Corsini Alessandra"
+        ]
+      },
+      {
+        "data": "2025-09-29",
+        "allenatore": "Tobia Di Meo",
+        "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)",
+        "orario": "21:00",
+        "nominativi": []
+      }
+    ]
   },
   "Misto": {
     "infoCosti": {
@@ -165,98 +149,101 @@
         "non_unibo": { "una_rata": 350, "due_rate": [235, 180] }
       }
     },
-    "turno1": {
-      "data": "2025-09-23",
-      "allenatore": "Alex Siroli",
-      "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)",
-      "orario": "21:00",
-      "nominativi": [
-        "Martini Alessandro",
-        "Mondardini Marco",
-        "Mongiusti Luca",
-        "Aguzzoni Giuseppe",
-        "Bonomi RIccardo",
-        "Agostini Alessia",
-        "Grandi Sofia",
-        "Balzoni Margherita",
-        "Levanetesi Elisa",
-        "Panariello Celine",
-        "Paradisi Sara",
-        "Rivara Greta",
-        "Valdiserri Sara",
-        "Zagnoli Sabrina",
-        "Tagliatesta Sofia",
-        "Ventrucci Luca",
-        "Boccia Marianna",
-        "Rossetti Domenico",
-        "Nieri Nico"
-      ]
-    },
-    "turno2": {
-      "data": "2025-09-25",
-      "allenatore": "Oscar Vitali",
-      "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)",
-      "orario": "21:30",
-      "nominativi": [
-        "Baldoni Manuel",
-        "Raffaeli Simone",
-        "Barchi Riccardo",
-        "Mariani Federico",
-        "Werpers Lasse",
-        "Barbieri Della Chiesa Enrico",
-        "Avenali Paolo",
-        "Cifarelli Simone",
-        "Campana Mattia",
-        "Ciccarelli Lisa",
-        "Golinucci Chiara",
-        "Lanzoni Gaia Luna",
-        "Arienti Alicia",
-        "Maltoni Martina",
-        "Mastrilli Alice",
-        "Mori Letizia",
-        "Savadori Erica",
-        "Valentini Laura",
-        "Molari Giorgia",
-        "Serrani Francesco",
-        "Sacchetti Valentina",
-        "Tognini Irene",
-        "Giacalone Pietro",
-        "Lombardi Viola"
-      ]
-    }
-  }
-  ,
+    "turni": [
+      {
+        "data": "2025-09-23",
+        "allenatore": "Alex Siroli",
+        "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)",
+        "orario": "21:00",
+        "nominativi": [
+          "Martini Alessandro",
+          "Mondardini Marco",
+          "Mongiusti Luca",
+          "Aguzzoni Giuseppe",
+          "Bonomi RIccardo",
+          "Agostini Alessia",
+          "Grandi Sofia",
+          "Balzoni Margherita",
+          "Levanetesi Elisa",
+          "Panariello Celine",
+          "Paradisi Sara",
+          "Rivara Greta",
+          "Valdiserri Sara",
+          "Zagnoli Sabrina",
+          "Tagliatesta Sofia",
+          "Ventrucci Luca",
+          "Boccia Marianna",
+          "Rossetti Domenico",
+          "Nieri Nico"
+        ]
+      },
+      {
+        "data": "2025-09-25",
+        "allenatore": "Oscar Vitali",
+        "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)",
+        "orario": "21:30",
+        "nominativi": [
+          "Baldoni Manuel",
+          "Raffaeli Simone",
+          "Barchi Riccardo",
+          "Mariani Federico",
+          "Werpers Lasse",
+          "Barbieri Della Chiesa Enrico",
+          "Avenali Paolo",
+          "Cifarelli Simone",
+          "Campana Mattia",
+          "Ciccarelli Lisa",
+          "Golinucci Chiara",
+          "Lanzoni Gaia Luna",
+          "Arienti Alicia",
+          "Maltoni Martina",
+          "Mastrilli Alice",
+          "Mori Letizia",
+          "Savadori Erica",
+          "Valentini Laura",
+          "Molari Giorgia",
+          "Serrani Francesco",
+          "Sacchetti Valentina",
+          "Tognini Irene",
+          "Giacalone Pietro",
+          "Lombardi Viola"
+        ]
+      }
+    ]
+  },
   "Base": {
-    "turno1": {
-      "data": "2025-09-30",
-      "allenatore": "Samuele Sirri",
-      "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)",
-      "orario": "21:00",
-      "nominativi": [
-        "Suzzi Filippo",
-        "Visani Tommaso",
-        "Mondardini Marco",
-        "Mariani Federico",
-        "Grieco Dania",
-        "Avenali Paolo",
-        "Mongiusti Luca",
-        "Sacchetti Valentina",
-        "Muzzi Alessandra",
-        "Cifarelli Simone",
-        "Floridesi Sara",
-        "D'Angelo Luca",
-        "Molari Giorgia",
-        "Pracucci Davide",
-        "Pallari Marta",
-        "Lombardi Alessandra",
-        "Ferrari Asia",
-        "Maltoni Martina",
-        "Barzanti Alan",
-        "Maldini Michelle",
-        "Zhang Luigi",
-        "Bevilacqua Anhaí"
-      ]
-    },
+    "turni": [
+      {
+        "data": "2025-09-30",
+        "allenatore": "Samuele Sirri",
+        "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)",
+        "orario": "21:00",
+        "nominativi": [
+          "Suzzi Filippo",
+          "Visani Tommaso",
+          "Mondardini Marco",
+          "Mariani Federico",
+          "Grieco Dania",
+          "Avenali Paolo",
+          "Mongiusti Luca",
+          "Sacchetti Valentina",
+          "Muzzi Alessandra",
+          "Cifarelli Simone",
+          "Floridesi Sara",
+          "D'Angelo Luca",
+          "Molari Giorgia",
+          "Pracucci Davide",
+          "Pallari Marta",
+          "Lombardi Alessandra",
+          "Ferrari Asia",
+          "Maltoni Martina",
+          "Barzanti Alan",
+          "Maldini Michelle",
+          "Zhang Luigi",
+          "Bevilacqua Anhaí"
+        ]
+      }
+    ],
     "infoCosti": {
       "allenatore": "Samuele Sirri",
       "giorni": [
@@ -270,5 +257,3 @@
     }
   }
 }
-
-
