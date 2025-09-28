@@ -1,7 +1,7 @@
 {
   "Maschile": {
     "infoCosti": {
-      "allenatore": "Nicola Faenza",
+      "allenatore": "Marco Leonori",
       "giorni": [
         { "giorno": "Mercoledi", "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)", "orario": "21:30" },
         { "giorno": "Venerdi", "palestra": "Plauto (https://maps.app.goo.gl/UhLcCCnk4CNCHAF46?g_st=ipc)", "orario": "21:00" }
@@ -13,7 +13,7 @@
     },
     "turno1": {
       "data": "2025-10-01",
-      "allenatore": "Nicola Faenza",
+      "allenatore": "Marco Leonori",
       "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)",
       "orario": "21:00",
       "nominativi": [
