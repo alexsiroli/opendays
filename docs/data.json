@@ -118,62 +118,33 @@
       }
     },
     "turno1": {
-      "data": "2025-09-23",
-      "allenatore": "Alex Siroli",
+      "data": "2025-09-30",
+      "allenatore": "Oscar Vitali",
       "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)",
       "orario": "21:00",
       "nominativi": [
-        "Martini Alessandro",
-        "Mondardini Marco",
-        "Mongiusti Luca",
-        "Aguzzoni Giuseppe",
-        "Bonomi RIccardo",
-        "Agostini Alessia",
-        "Grandi Sofia",
-        "Balzoni Margherita",
-        "Levanetesi Elisa",
-        "Panariello Celine",
-        "Paradisi Sara",
-        "Rivara Greta",
-        "Valdiserri Sara",
-        "Zagnoli Sabrina",
-        "Tagliatesta Sofia",
-        "Ventrucci Luca",
-        "Boccia Marianna",
-        "Rossetti Domenico",
-        "Nieri Nico"
-      ]
-    },
-    "turno2": {
-      "data": "2025-09-25",
-      "allenatore": "Oscar Vitali",
-      "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)",
-      "orario": "21:30",
-      "nominativi": [
-        "Baldoni Manuel",
-        "Raffaeli Simone",
-        "Barchi Riccardo",
-        "Mariani Federico",
-        "Werpers Lasse",
-        "Barbieri Della Chiesa Enrico",
-        "Avenali Paolo",
-        "Cifarelli Simone",
-        "Campana Mattia",
-        "Ciccarelli Lisa",
-        "Golinucci Chiara",
         "Lanzoni Gaia Luna",
-        "Arienti Alicia",
-        "Maltoni Martina",
-        "Mastrilli Alice",
-        "Mori Letizia",
+        "Golinucci Chiara",
+        "Agostini Alessia",
+        "Avenali Paolo",
         "Savadori Erica",
-        "Valentini Laura",
-        "Molari Giorgia",
-        "Serrani Francesco",
-        "Sacchetti Valentina",
+        "Grandi Sofia",
         "Tognini Irene",
+        "Raffaeli Simone",
+        "Baldoni Manuel",
+        "Mastrilli Alice",
+        "Panariello Celine",
         "Giacalone Pietro",
-        "Lombardi Viola"
+        "Nieri Nico",
+        "Zagnoli Sabrina",
+        "Cifarelli Simone",
+        "Mariani Federico",
+        "Balzoni Margherita",
+        "Bonomi Riccardo",
+        "Ciccarelli Lisa",
+        "Molari Giorgia",
+        "Rossetti Domenico",
+        "Tagliatesta Sofia"
       ]
     }
   }
@@ -181,6 +152,28 @@
   "Base": {
     "turno1": {
       "data": "2025-09-30",
+      "allenatore": "Samuele Sirri",
+      "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)",
+      "orario": "21:00",
+      "nominativi": [
+        "Pallari Marta",
+        "Lombardi Alessandra",
+        "Ferrari Asia",
+        "Maltoni Martina",
+        "Barzanti Alan",
+        "Maldini Michelle",
+        "Zhang Luigi",
+        "Bevilacqua Anhaí",
+        "Maltoni Martina",
+        "Paolucci Giacomo",
+        "Zanotti Chiara",
+        "Foschi Giovanni",
+        "Balestra Alice"
+      ]
+    },
+    {
+    "turno2": {
+      "data": "2025-10-02",
       "allenatore": "Samuele Sirri",
       "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)",
       "orario": "21:00",
@@ -198,20 +191,9 @@
         "Floridesi Sara",
         "D'Angelo Luca",
         "Molari Giorgia",
-        "Pracucci Davide",
-        "Pallari Marta",
-        "Lombardi Alessandra",
-        "Ferrari Asia",
-        "Maltoni Martina",
-        "Barzanti Alan",
-        "Maldini Michelle",
-        "Zhang Luigi",
-        "Bevilacqua Anhaí",
-        "Maltoni Martina",
-        "Paolucci Giacomo",
-        "Zanotti Chiara"
+        "Pracucci Davide"
       ]
-    },
+    }
     "infoCosti": {
       "allenatore": "Samuele Sirri",
       "giorni": [
