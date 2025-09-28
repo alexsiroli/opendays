@@ -10,9 +10,10 @@
   /**
    * Struttura dati attesa in data.json:
    * {
-   *   "Maschile": { "turno1": ["Nome Cognome"], "turno2": ["..."] },
-   *   "Femminile": { "turno1": [], "turno2": [] },
-   *   "Misto": { "turno1": [], "turno2": [] }
+   *   "Maschile": { "turno1": {...}, "turno2": {...}, "infoCosti": {...} },
+   *   "Femminile": { ... },
+   *   "Misto": { ... },
+   *   "Base": { ... }
    * }
    */
   const EMPTY_TURNO = { data: '', allenatore: '', palestra: '', orario: '', nominativi: [] };
@@ -27,31 +28,30 @@
   let db = EMPTY_DATA;
   let currentQuery = '';
 
-  // Le etichette dei turni vengono ora lette da data.json (campo ISO "data")
-  
+  // ---------- RENDER CATEGORIA ----------
   function renderCategoria(categoria) {
-    const dataset = db[categoria] || { turno1: EMPTY_TURNO, turno2: EMPTY_TURNO };
+    const dataset = db[categoria] || { turno1: EMPTY_TURNO, turno2: EMPTY_TURNO, infoCosti: EMPTY_INFO_COSTI };
     const turns = computeTurns(dataset, categoria);
     document.body.setAttribute('data-cat', categoria);
-  
+
     if (turnSelector) {
-      turnSelector.addEventListener('click', function (e) {
-        const btn = e.target.closest('.turn-btn');
-        if (!btn) return;
-        const selected = btn.getAttribute('data-turn'); // '1', '2' o 'infocosti'
-    
-        setTurnButtonsState(selected);
-    
-        const categoria = document.body.getAttribute('data-cat');
-        const dataset = db[categoria] || { turno1: EMPTY_TURNO, turno2: EMPTY_TURNO };
-        const turns = computeTurns(dataset, categoria);
-    
-        renderTurnDetails(turns, selected);
-        currentTurn = selected;
-      });
+      renderTurnButtons(turns);
+
+      // selezione iniziale/attuale coerente
+      let selected = '1';
+      if (currentTurn === 'infocosti') {
+        selected = 'infocosti';
+      } else if (currentTurn && Number(currentTurn) >= 1 && Number(currentTurn) <= turns.length) {
+        selected = String(Number(currentTurn));
+      }
+
+      setTurnButtonsState(selected);
+      renderTurnDetails(turns, selected);
+      currentTurn = selected;
     }
   }
 
+  // ---------- LISTA NOMINATIVI ----------
   function renderLista(container, nominativi) {
     container.innerHTML = '';
     if (!nominativi || nominativi.length === 0) {
@@ -66,12 +66,14 @@
     );
     const q = currentQuery.trim().toLowerCase();
     for (const nome of sorted) {
+      // (se in futuro filtri con q, qui puoi fare il match)
       const li = document.createElement('li');
       li.textContent = nome;
       container.appendChild(li);
     }
   }
 
+  // ---------- META / CALENDAR ----------
   function renderMeta(container, turno, categoria, dateLabel) {
     if (!container) return;
     container.innerHTML = '';
@@ -109,10 +111,9 @@
       container.appendChild(div);
     }
 
-    // Calendar section label
-    // Actions: calendar buttons
     const actions = document.createElement('div');
     actions.className = 'turno-actions';
+
     const addIcsBtn = document.createElement('button');
     addIcsBtn.type = 'button';
     addIcsBtn.className = 'btn';
@@ -152,7 +153,6 @@
 
   function parsePalestra(raw) {
     if (!raw || typeof raw !== 'string') return { text: '-', url: '' };
-    // Trova URL http/https
     const urlMatch = raw.match(/https?:\/\/\S+/);
     const url = urlMatch ? urlMatch[0].replace(/[),.]+$/, '') : '';
     const text = url ? raw.replace(url, '').trim().replace(/[()]/g, '').trim() : raw;
@@ -170,13 +170,11 @@
   }
 
   function parseItalianDateTime(labelWithYear, timeHHmm) {
-    // Esempio: "Mercoledi 24 settembre 2025" + "21:30"
     const months = {
       gennaio: 0, febbraio: 1, marzo: 2, aprile: 3, maggio: 4, giugno: 5,
       luglio: 6, agosto: 7, settembre: 8, ottobre: 9, novembre: 10, dicembre: 11,
     };
     const parts = labelWithYear.toLowerCase().split(/\s+/);
-    // trova giorno numero e mese
     let day = 1, month = 0, year = new Date().getFullYear();
     for (let i = 0; i < parts.length; i++) {
       const p = parts[i];
@@ -189,9 +187,7 @@
   }
 
   function buildDateFromIsoAndTime(isoDate, timeHHmm) {
-    // isoDate atteso: YYYY-MM-DD
     if (!isoDate) {
-      // fallback: oggi alle HH:mm
       const now = new Date();
       const [hh, mm] = (timeHHmm || '21:00').split(':').map(x => parseInt(x, 10));
       return new Date(now.getFullYear(), now.getMonth(), now.getDate(), hh || 21, mm || 0, 0);
@@ -211,7 +207,6 @@
   }
 
   function toUtcBasic(dt) {
-    // YYYYMMDDTHHMMSSZ
     const pad = n => String(n).padStart(2, '0');
     return (
       dt.getUTCFullYear().toString() +
@@ -228,7 +223,7 @@
     const dtEnd = toUtcBasic(end);
     const uid = Math.random().toString(36).slice(2) + '@cusb-opendays';
     const now = toUtcBasic(new Date());
-    const esc = s => (s || '').toString().replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/,/g, '\,').replace(/;/g, '\;');
+    const esc = s => (s || '').toString().replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/,/g, '\\,').replace(/;/g, '\\;');
     const lines = [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
@@ -262,12 +257,12 @@
     return (name || 'evento').replace(/\s+/g, '_').replace(/[^\w.-]/g, '');
   }
 
+  // ---------- LOAD DATA ----------
   async function loadData() {
     try {
       const res = await fetch('data.json', { cache: 'no-store' });
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const json = await res.json();
-      // Validazione leggera
       db = {
         Maschile: normalize(json.Maschile),
         Femminile: normalize(json.Femminile),
@@ -316,6 +311,7 @@
     };
   }
 
+  // ---------- TABS CATEGORIA ----------
   segmented.addEventListener('click', function (e) {
     const btn = e.target.closest('.segment');
     if (!btn) return;
@@ -327,15 +323,18 @@
     renderCategoria(categoria);
   });
 
+  // ---------- LISTENER TURNI (UNICO, fuori da renderCategoria) ----------
   if (turnSelector) {
     turnSelector.addEventListener('click', function (e) {
       const btn = e.target.closest('.turn-btn');
       if (!btn) return;
-      const selected = btn.getAttribute('data-turn');
+      const selected = btn.getAttribute('data-turn'); // '1', '2' o 'infocosti'
       setTurnButtonsState(selected);
+
       const categoria = document.body.getAttribute('data-cat');
-      const dataset = db[categoria] || { turno1: EMPTY_TURNO, turno2: EMPTY_TURNO };
-      const turns = computeTurns(dataset);
+      const dataset = db[categoria] || { turno1: EMPTY_TURNO, turno2: EMPTY_TURNO, infoCosti: EMPTY_INFO_COSTI };
+      const turns = computeTurns(dataset, categoria);
+
       renderTurnDetails(turns, selected);
       currentTurn = selected;
     });
@@ -362,7 +361,6 @@
       btn.textContent = `Turno ${n}`;
       turnSelector.appendChild(btn);
     });
-    // Aggiungi tab unico Info e Costi (vuoto per ora)
     const infocostiBtn = document.createElement('button');
     infocostiBtn.className = 'turn-btn infocosti';
     infocostiBtn.setAttribute('data-turn', 'infocosti');
@@ -377,6 +375,7 @@
       const categoria = document.body.getAttribute('data-cat');
       const dataset = db[categoria] || { turno1: {}, turno2: {}, infoCosti: {} };
       renderInfoCosti(dataset, categoria);
+      if (turnCount) turnCount.textContent = '';
       return;
     }
     const idx = parseInt(selected, 10) - 1;
@@ -414,12 +413,10 @@
   }
 
   function renderInfoCosti(datasetCategoria, categoria) {
-    // Meta: allenatore + giorni
     const info = datasetCategoria.infoCosti || {};
     const allenatore = info.allenatore || '';
     const giorni = Array.isArray(info.giorni) ? info.giorni : [];
 
-    // Costruisci blocco meta per Info e Costi
     if (turnMeta) {
       turnMeta.innerHTML = '';
       const rows = [];
@@ -446,17 +443,14 @@
         }
         turnMeta.appendChild(pills);
       }
-      // Righe base già renderizzate sopra? Per Info e Costi non servono turno-specifiche
     }
 
-    // Lista: pannello costi con controlli
     if (turnList) {
       turnList.innerHTML = '';
       const li = document.createElement('li');
       li.className = 'cost-panel';
       const controls = document.createElement('div'); controls.className = 'cost-controls';
 
-      // Scelte custom (senza select)
       let profilo = 'unibo';
       let rate = categoria === 'Base' ? 'monosettimanale' : '1';
       const lab1 = document.createElement('div'); lab1.className = 'cost-label'; lab1.textContent = 'Profilo';
@@ -510,8 +504,7 @@
     if (turnCount) turnCount.textContent = '';
   }
 
-  // search UI removed
-
+  // ---------- INIT ----------
   (async function init() {
     await loadData();
     const active = segmented.querySelector('.segment.is-active');
