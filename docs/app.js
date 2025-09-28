@@ -6,6 +6,8 @@
   const turnTitle = document.getElementById('turn-title');
   const turnMeta = document.getElementById('turn-meta');
   const turnCount = document.getElementById('turn-count');
+  // Base URL della cartella in cui si trova questo script (app.js)
+  const SCRIPT_BASE = new URL('.', document.currentScript?.src || location.href);
 
   /**
    * Struttura dati attesa in data.json:
@@ -260,8 +262,9 @@
   // ---------- LOAD DATA ----------
   async function loadData() {
     try {
-      const res = await fetch('data.json', { cache: 'no-store' });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const dataUrl = new URL('data.json', SCRIPT_BASE).href; // <-- relativo ad app.js
+      const res = await fetch(dataUrl, { cache: 'no-store' });
+      if (!res.ok) throw new Error('HTTP ' + res.status + ' su ' + dataUrl);
       const json = await res.json();
       db = {
         Maschile: normalize(json.Maschile),
