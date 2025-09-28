@@ -147,63 +147,59 @@
         "Tagliatesta Sofia"
       ]
     }
-  }
-  ,
+  },
   "Base": {
-    "turno1": {
-      "data": "2025-09-30",
-      "allenatore": "Samuele Sirri",
-      "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)",
-      "orario": "21:00",
-      "nominativi": [
-        "Pallari Marta",
-        "Lombardi Alessandra",
-        "Ferrari Asia",
-        "Maltoni Martina",
-        "Barzanti Alan",
-        "Maldini Michelle",
-        "Zhang Luigi",
-        "Bevilacqua Anhaí",
-        "Maltoni Martina",
-        "Paolucci Giacomo",
-        "Zanotti Chiara",
-        "Foschi Giovanni",
-        "Balestra Alice"
-      ]
-    },
-    {
-    "turno2": {
-      "data": "2025-10-02",
-      "allenatore": "Samuele Sirri",
-      "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)",
-      "orario": "21:00",
-      "nominativi": [
-        "Suzzi Filippo",
-        "Visani Tommaso",
-        "Mondardini Marco",
-        "Mariani Federico",
-        "Grieco Dania",
-        "Avenali Paolo",
-        "Mongiusti Luca",
-        "Sacchetti Valentina",
-        "Muzzi Alessandra",
-        "Cifarelli Simone",
-        "Floridesi Sara",
-        "D'Angelo Luca",
-        "Molari Giorgia",
-        "Pracucci Davide"
-      ]
+  "infoCosti": {
+    "allenatore": "Samuele Sirri",
+    "giorni": [
+      { "giorno": "Martedi", "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)", "orario": "21:00" },
+      { "giorno": "Giovedi", "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)", "orario": "21:00" }
+    ],
+    "costi": {
+      "unibo": { "monosettimanale": 185, "bisettimanale": 250 },
+      "non_unibo": { "monosettimanale": 230, "bisettimanale": 320 }
     }
-    "infoCosti": {
-      "allenatore": "Samuele Sirri",
-      "giorni": [
-        { "giorno": "Martedi", "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)", "orario": "21:00" },
-        { "giorno": "Giovedi", "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)", "orario": "21:00" }
-      ],
-      "costi": {
-        "unibo": { "monosettimanale": 185, "bisettimanale": 250 },
-        "non_unibo": { "monosettimanale": 230, "bisettimanale": 320 }
-      }
-    }
+  },
+  "turno1": {
+    "data": "2025-09-30",
+    "allenatore": "Samuele Sirri",
+    "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)",
+    "orario": "21:00",
+    "nominativi": [
+      "Pallari Marta",
+      "Lombardi Alessandra",
+      "Ferrari Asia",
+      "Maltoni Martina",
+      "Barzanti Alan",
+      "Maldini Michelle",
+      "Zhang Luigi",
+      "Bevilacqua Anhaí",
+      "Paolucci Giacomo",
+      "Zanotti Chiara",
+      "Foschi Giovanni",
+      "Balestra Alice"
+    ]
+  },
+  "turno2": {
+    "data": "2025-10-02",
+    "allenatore": "Samuele Sirri",
+    "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)",
+    "orario": "21:00",
+    "nominativi": [
+      "Suzzi Filippo",
+      "Visani Tommaso",
+      "Mondardini Marco",
+      "Mariani Federico",
+      "Grieco Dania",
+      "Avenali Paolo",
+      "Mongiusti Luca",
+      "Sacchetti Valentina",
+      "Muzzi Alessandra",
+      "Cifarelli Simone",
+      "Floridesi Sara",
+      "D'Angelo Luca",
+      "Molari Giorgia",
+      "Pracucci Davide"
+    ]
   }
 }
