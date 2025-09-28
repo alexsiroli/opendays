@@ -261,19 +261,90 @@
 
   // ---------- LOAD DATA ----------
   async function loadData() {
+    // costruisco un URL affidabile per data.json (stessa cartella della pagina)
+    const dir = location.pathname.endsWith('/') ? location.pathname : location.pathname.replace(/[^/]+$/, '/');
+    const dataUrl = `${dir}data.json?ts=${Date.now()}`;
+  
+    // helper per mostrare un banner di errore
+    function showError(msg) {
+      let el = document.querySelector('.data-error');
+      if (!el) {
+        el = document.createElement('div');
+        el.className = 'data-error';
+        el.style.cssText = 'position:fixed;bottom:8px;left:8px;right:8px;padding:10px 12px;background:#ffe2e2;color:#900;border:1px solid #f99;border-radius:6px;font:14px/1.3 system-ui,Segoe UI,Roboto;z-index:9999';
+        document.body.appendChild(el);
+      }
+      el.textContent = 'Errore caricamento data.json: ' + msg;
+    }
+  
+    // fallback: legge JSON inline da <script type="application/json" id="data-json">
+    function readInlineJson() {
+      const tag = document.getElementById('data-json');
+      if (!tag) return null;
+      try { return JSON.parse(tag.textContent); } catch { return null; }
+    }
+  
     try {
-      const dataUrl = new URL('data.json', SCRIPT_BASE).href; // <-- relativo ad app.js
+      // ATTENZIONE: molte volte aprendo file locali (file://) la fetch fallisce.
+      if (location.protocol === 'file:') {
+        const inline = readInlineJson();
+        if (!inline) {
+          showError('stai aprendo la pagina da file:// : avvia un server locale (es. "python -m http.server") oppure incolla il JSON in <script id="data-json" type="application/json">…</script>.');
+          db = EMPTY_DATA;
+          return;
+        }
+        // usa l’inline
+        db = {
+          Maschile: normalize(inline.Maschile),
+          Femminile: normalize(inline.Femminile),
+          Misto:    normalize(inline.Misto),
+          Base:     normalize(inline.Base),
+        };
+        return;
+      }
+  
+      // fetch normale (http/https)
       const res = await fetch(dataUrl, { cache: 'no-store' });
-      if (!res.ok) throw new Error('HTTP ' + res.status + ' su ' + dataUrl);
-      const json = await res.json();
+      if (!res.ok) throw new Error(`HTTP ${res.status} su ${dataUrl}`);
+  
+      // leggo testo per poter loggare/smarcare errori JSON
+      const text = await res.text();
+      let json;
+      try {
+        json = JSON.parse(text);
+      } catch (e) {
+        // se non è JSON valido, tentativo di fallback inline
+        const inline = readInlineJson();
+        if (!inline) {
+          console.error('[opendays] data.json non è JSON valido. Testo ricevuto:', text);
+          throw new Error('JSON non valido (controlla virgole finali e sintassi)');
+        }
+        json = inline;
+      }
+  
+      // Validazione leggera/normalizzazione
       db = {
         Maschile: normalize(json.Maschile),
         Femminile: normalize(json.Femminile),
-        Misto: normalize(json.Misto),
-        Base: normalize(json.Base),
+        Misto:    normalize(json.Misto),
+        Base:     normalize(json.Base),
       };
     } catch (err) {
       console.warn('Impossibile caricare data.json, uso struttura vuota:', err);
+      showError(err.message || String(err));
+  
+      // ulteriore tentativo: inline script
+      const inline = readInlineJson();
+      if (inline) {
+        db = {
+          Maschile: normalize(inline.Maschile),
+          Femminile: normalize(inline.Femminile),
+          Misto:    normalize(inline.Misto),
+          Base:     normalize(inline.Base),
+        };
+        return;
+      }
+  
       db = EMPTY_DATA;
     }
   }
