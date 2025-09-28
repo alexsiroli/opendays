@@ -160,8 +160,8 @@
       "non_unibo": { "monosettimanale": 230, "bisettimanale": 320 }
     }
   },
-  "turno1": {
-    "data": "2025-09-30",
+  "turno2": {
+    "data": "2025-10-02",
     "allenatore": "Samuele Sirri",
     "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)",
     "orario": "21:00",
@@ -180,8 +180,8 @@
       "Balestra Alice"
     ]
   },
-  "turno2": {
-    "data": "2025-10-02",
+  "turno1": {
+    "data": "2025-09-30",
     "allenatore": "Samuele Sirri",
     "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)",
     "orario": "21:00",
