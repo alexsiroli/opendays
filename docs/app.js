@@ -28,19 +28,27 @@
   let currentQuery = '';
 
   // Le etichette dei turni vengono ora lette da data.json (campo ISO "data")
-
+  
   function renderCategoria(categoria) {
     const dataset = db[categoria] || { turno1: EMPTY_TURNO, turno2: EMPTY_TURNO };
-    const turns = computeTurns(dataset);
-    const labels = turns.map(t => t.label);
+    const turns = computeTurns(dataset, categoria);
     document.body.setAttribute('data-cat', categoria);
-    const isSingleTurn = labels.length <= 1;
+  
     if (turnSelector) {
-      renderTurnButtons(turns);
-      const selected = currentTurn && currentTurn <= String(turns.length) ? currentTurn : '1';
-      setTurnButtonsState(selected);
-      renderTurnDetails(turns, selected);
-      currentTurn = selected;
+      turnSelector.addEventListener('click', function (e) {
+        const btn = e.target.closest('.turn-btn');
+        if (!btn) return;
+        const selected = btn.getAttribute('data-turn'); // '1', '2' o 'infocosti'
+    
+        setTurnButtonsState(selected);
+    
+        const categoria = document.body.getAttribute('data-cat');
+        const dataset = db[categoria] || { turno1: EMPTY_TURNO, turno2: EMPTY_TURNO };
+        const turns = computeTurns(dataset, categoria);
+    
+        renderTurnDetails(turns, selected);
+        currentTurn = selected;
+      });
     }
   }
 
@@ -381,11 +389,26 @@
     if (turnCount) turnCount.textContent = `Totale giocatori: ${list.length}`;
   }
 
-  function computeTurns(dataset) {
+  function computeTurns(dataset, categoria) {
     const arr = [];
-    if (dataset.turno1) arr.push({ label: formatItalianDate(dataset.turno1.data) || 'Turno 1', data: dataset.turno1 });
-    if (dataset.turno2 && (dataset.turno2.data || dataset.turno2.orario || (dataset.turno2.nominativi && dataset.turno2.nominativi.length))) {
-      arr.push({ label: formatItalianDate(dataset.turno2.data) || 'Turno 2', data: dataset.turno2 });
+    if (dataset.turno1) {
+      arr.push({
+        label: formatItalianDate(dataset.turno1.data) || 'Turno 1',
+        data: dataset.turno1,
+        categoria
+      });
+    }
+    if (
+      dataset.turno2 &&
+      (dataset.turno2.data ||
+        dataset.turno2.orario ||
+        (dataset.turno2.nominativi && dataset.turno2.nominativi.length))
+    ) {
+      arr.push({
+        label: formatItalianDate(dataset.turno2.data) || 'Turno 2',
+        data: dataset.turno2,
+        categoria
+      });
     }
     return arr;
   }
