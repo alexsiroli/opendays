@@ -76,6 +76,33 @@
         "Arienti Alicia",
         "Valentini Laura"
       ]
+    },
+    "turno2": {
+      "data": "2025-10-01",
+      "allenatore": "Tobia Di Meo",
+      "palestra": "DA DEFINIRE",
+      "orario": "21:00",
+      "nominativi": [
+        "Passerini Cecilia",
+        "Levantesi Elisa",
+        "Sbrighi Margherita",
+        "Rivara Greta",
+        "Fattori Giorgia",
+        "Severi Alessia",
+        "Mori Letizia",
+        "Paradisi Sara",
+        "Sanchez Barbara",
+        "Savadori Erica",
+        "Calisi Domiziana",
+        "Beccati Alice",
+        "Panariello Celine",
+        "Pignotti Roberta",
+        "Corsini Alessandra",
+        "Grazia Carlotta",
+        "Zagnoli Sabrina",
+        "Maltoni Martina",
+        "Bocculini Lucia"
+      ]
     }
   },
   "Misto": {
@@ -122,63 +149,64 @@
     }
   },
   "Base": {
-  "infoCosti": {
-    "allenatore": "Samuele Sirri",
-    "giorni": [
-      { "giorno": "Martedi", "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)", "orario": "21:00" },
-      { "giorno": "Giovedi", "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)", "orario": "21:00" }
-    ],
-    "costi": {
-      "unibo": { "monosettimanale": 185, "bisettimanale": 250 },
-      "non_unibo": { "monosettimanale": 230, "bisettimanale": 320 }
+    "infoCosti": {
+      "allenatore": "Samuele Sirri",
+      "giorni": [
+        { "giorno": "Martedi", "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)", "orario": "21:00" },
+        { "giorno": "Giovedi", "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)", "orario": "21:00" }
+      ],
+      "costi": {
+        "unibo": { "monosettimanale": 185, "bisettimanale": 250 },
+        "non_unibo": { "monosettimanale": 230, "bisettimanale": 320 }
+      }
+    },
+    "turno2": {
+      "data": "2025-10-02",
+      "allenatore": "Samuele Sirri",
+      "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)",
+      "orario": "21:15",
+      "nominativi": [
+        "Lombardi Alessandra",
+        "Ferrari Asia",
+        "Maltoni Martina",
+        "Barzanti Alan",
+        "Maldini Michelle",
+        "Zhang Luigi",
+        "Bevilacqua Anhaí",
+        "Zanotti Chiara",
+        "Foschi Giovanni",
+        "Cifarelli Simone",
+        "Avenali Paolo",
+        "Molari Giorgia",
+        "Mariani Federico",
+        "Fici Salvatore"
+      ]
+    },
+    "turno1": {
+      "data": "2025-09-30",
+      "allenatore": "Samuele Sirri",
+      "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)",
+      "orario": "21:15",
+      "nominativi": [
+        "Pallari Marta",
+        "Paolucci Giacomo",
+        "Suzzi Filippo",
+        "Visani Tommaso",
+        "Canducci Sofia",
+        "Mondardini Marco",
+        "Brighi Alessandro",
+        "Grieco Dania",
+        "Balestra Alice",
+        "Mongiusti Luca",
+        "Sacchetti Valentina",
+        "Muzzi Alessandra",
+        "Floridesi Sara",
+        "D'Angelo Luca",
+        "Pracucci Davide",
+        "Lombardi Viola",
+        "Bagnale Martino",
+        "Aguzzoni Giuseppe"
+      ]
     }
-  },
-  "turno2": {
-    "data": "2025-10-02",
-    "allenatore": "Samuele Sirri",
-    "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)",
-    "orario": "21:15",
-    "nominativi": [
-      "Lombardi Alessandra",
-      "Ferrari Asia",
-      "Maltoni Martina",
-      "Barzanti Alan",
-      "Maldini Michelle",
-      "Zhang Luigi",
-      "Bevilacqua Anhaí",
-      "Zanotti Chiara",
-      "Foschi Giovanni",
-      "Cifarelli Simone",
-      "Avenali Paolo",
-      "Molari Giorgia",
-      "Mariani Federico",
-      "Fici Salvatore"
-    ]
-  },
-  "turno1": {
-    "data": "2025-09-30",
-    "allenatore": "Samuele Sirri",
-    "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)",
-    "orario": "21:15",
-    "nominativi": [
-      "Pallari Marta",
-      "Paolucci Giacomo",
-      "Suzzi Filippo",
-      "Visani Tommaso",
-      "Canducci Sofia",
-      "Mondardini Marco",
-      "Brighi Alessandro",
-      "Grieco Dania",
-      "Balestra Alice",
-      "Mongiusti Luca",
-      "Sacchetti Valentina",
-      "Muzzi Alessandra",
-      "Floridesi Sara",
-      "D'Angelo Luca",
-      "Pracucci Davide",
-      "Lombardi Viola",
-      "Bagnale Martino",
-      "Aguzzoni Giuseppe"
-    ]
   }
-}}
+}
