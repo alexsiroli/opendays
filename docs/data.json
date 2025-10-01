@@ -80,7 +80,7 @@
     "turno2": {
       "data": "2025-10-01",
       "allenatore": "Tobia Di Meo",
-      "palestra": "DA DEFINIRE",
+      "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)",
       "orario": "21:00",
       "nominativi": [
         "Passerini Cecilia",
@@ -95,11 +95,10 @@
         "Savadori Erica",
         "Calisi Domiziana",
         "Beccati Alice",
-        "Panariello Celine",
         "Pignotti Roberta",
         "Corsini Alessandra",
         "Grazia Carlotta",
-        "Zagnoli Sabrina",
+        "Grandi Sofia",
         "Maltoni Martina",
         "Bocculini Lucia"
       ]
@@ -152,6 +151,32 @@
         "Canducci Sofia",
         "Barbieri Della Chiesa Enrico"
       ]
+    },
+      "turno2": {
+      "data": "2025-10-02",
+      "allenatore": "Oscar Vitali",
+      "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)",
+      "orario": "21:00",
+      "nominativi": [
+        "Lanzoni Gaia Luna",
+        "Golinucci Chiara",
+        "Agostini Alessia",
+        "Avenali Paolo",
+        "Raffaeli Simone",
+        "Baldoni Manuel",
+        "Mastrilli Alice",
+        "Panariello Celine",
+        "Zagnoli Sabrina",
+        "Mariani Federico",
+        "Balzoni Margherita",
+        "Ciccarelli Lisa",
+        "Barchi Riccardo",
+        "Siroli Alex",
+        "Canducci Sofia",
+        "Barbieri Della Chiesa Enrico",
+        "Serrani Francesco",
+        "Zignani Filippo"
+      ]
     }
   },
   "Base": {
@@ -186,7 +211,9 @@
         "Molari Giorgia",
         "Mariani Federico",
         "Lombardi Viola",
-        "Fici Salvatore"
+        "Fici Salvatore",
+        "Suzzi Filippo",
+        "Arienti Alicia"
       ]
     },
     "turno1": {
