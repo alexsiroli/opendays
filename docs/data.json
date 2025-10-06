@@ -43,7 +43,7 @@
       "allenatore": "Samuele Sirri",
       "giorni": [
         { "giorno": "Martedi", "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)", "orario": "21:00" },
-        { "giorno": "Mercoledi", "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)", "orario": "21:30" },
+        { "giorno": "Mercoledi", "palestra": "Cubo (https://maps.app.goo.gl/2i4xBtj7GR3Xr7n9A?g_st=ipc)", "orario": "21:00" },
         { "giorno": "Giovedi", "palestra": "ITIS (https://maps.app.goo.gl/rYD3EDZNAUEdigg38?g_st=ipc)", "orario": "21:00" },
         { "giorno": "Venerdi", "palestra": "Plauto (https://maps.app.goo.gl/UhLcCCnk4CNCHAF46?g_st=ipc)", "orario": "21:00" }
       
